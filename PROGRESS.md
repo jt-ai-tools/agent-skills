@@ -31,7 +31,7 @@
 | skills/react-best-practices/rules/async-dependencies.md | 已完成 | |
 | skills/react-best-practices/rules/async-parallel.md | 已完成 | |
 | skills/react-best-practices/rules/async-suspense-boundaries.md | 已完成 | |
-| skills/react-best-practices/rules/bundle-barrel-imports.md | 待處理 | |
+| skills/react-best-practices/rules/bundle-barrel-imports.md | 已完成 | |
 | skills/react-best-practices/rules/bundle-conditional.md | 待處理 | |
 | skills/react-best-practices/rules/bundle-defer-third-party.md | 待處理 | |
 | skills/react-best-practices/rules/bundle-dynamic-imports.md | 待處理 | |

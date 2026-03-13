@@ -1,27 +1,23 @@
 ---
-title: Use Native Navigators for Navigation
+title: 使用原生導航器進行導航
 impact: HIGH
-impactDescription: native performance, platform-appropriate UI
+impactDescription: 原生效能、符合平台規範的 UI
 tags: navigation, react-navigation, expo-router, native-stack, tabs
 ---
 
-[繁體中文版 (Traditional Chinese)](./navigation-native-navigators_zh_TW.md)
+[English Version](./navigation-native-navigators.md)
 
-## Use Native Navigators for Navigation
+## 使用原生導航器進行導航
 
-Always use native navigators instead of JS-based ones. Native navigators use
-platform APIs (UINavigationController on iOS, Fragment on Android) for better
-performance and native behavior.
+始終使用原生導航器（native navigators）而非基於 JS 的導航器。原生導航器使用平台 API（iOS 上的 UINavigationController，Android 上的 Fragment）以獲得更好的效能和原生行為。
 
-**For stacks:** Use `@react-navigation/native-stack` or expo-router's default
-stack (which uses native-stack). Avoid `@react-navigation/stack`.
+**對於 Stack（堆疊）：** 使用 `@react-navigation/native-stack` 或 expo-router 的預設 stack（它本身就使用 native-stack）。避免使用 `@react-navigation/stack`。
 
-**For tabs:** Use `react-native-bottom-tabs` (native) or expo-router's native
-tabs. Avoid `@react-navigation/bottom-tabs` when native feel matters.
+**對於 Tab（分頁）：** 使用 `react-native-bottom-tabs`（原生）或 expo-router 的原生 tabs。當原生感（native feel）很重要時，避免使用 `@react-navigation/bottom-tabs`。
 
-### Stack Navigation
+### Stack 導航 (Stack Navigation)
 
-**Incorrect (JS stack navigator):**
+**錯誤（JS stack 導航器）：**
 
 ```tsx
 import { createStackNavigator } from '@react-navigation/stack'
@@ -38,7 +34,7 @@ function App() {
 }
 ```
 
-**Correct (native stack with react-navigation):**
+**正確（使用 react-navigation 的原生 stack）：**
 
 ```tsx
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -55,7 +51,7 @@ function App() {
 }
 ```
 
-**Correct (expo-router uses native stack by default):**
+**正確（expo-router 預設使用原生 stack）：**
 
 ```tsx
 // app/_layout.tsx
@@ -66,9 +62,9 @@ export default function Layout() {
 }
 ```
 
-### Tab Navigation
+### Tab 導航 (Tab Navigation)
 
-**Incorrect (JS bottom tabs):**
+**錯誤（JS 底部分頁）：**
 
 ```tsx
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -85,7 +81,7 @@ function App() {
 }
 ```
 
-**Correct (native bottom tabs with react-navigation):**
+**正確（使用 react-navigation 的原生底部分頁）：**
 
 ```tsx
 import { createNativeBottomTabNavigator } from '@bottom-tabs/react-navigation'
@@ -114,7 +110,7 @@ function App() {
 }
 ```
 
-**Correct (expo-router native tabs):**
+**正確（expo-router 原生分頁）：**
 
 ```tsx
 // app/(tabs)/_layout.tsx
@@ -124,11 +120,11 @@ export default function TabLayout() {
   return (
     <NativeTabs>
       <NativeTabs.Trigger name='index'>
-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>首頁</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf='house.fill' md='home' />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name='settings'>
-        <NativeTabs.Trigger.Label>Settings</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>設定</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf='gear' md='settings' />
       </NativeTabs.Trigger>
     </NativeTabs>
@@ -136,14 +132,11 @@ export default function TabLayout() {
 }
 ```
 
-On iOS, native tabs automatically enable `contentInsetAdjustmentBehavior` on the
-first `ScrollView` at the root of each tab screen, so content scrolls correctly
-behind the translucent tab bar. If you need to disable this, use
-`disableAutomaticContentInsets` on the trigger.
+在 iOS 上，原生分頁會自動在每個分頁畫面根部的第一個 `ScrollView` 上啟用 `contentInsetAdjustmentBehavior`，因此內容可以正確地在半透明的分頁列後方滾動。如果您需要停用此功能，請在 trigger 上使用 `disableAutomaticContentInsets`。
 
-### Prefer Native Header Options Over Custom Components
+### 優先使用原生 Header 選項而非自定義組件
 
-**Incorrect (custom header component):**
+**錯誤（自定義 header 組件）：**
 
 ```tsx
 <Stack.Screen
@@ -155,36 +148,33 @@ behind the translucent tab bar. If you need to disable this, use
 />
 ```
 
-**Correct (native header options):**
+**正確（原生 header 選項）：**
 
 ```tsx
 <Stack.Screen
   name='Profile'
   component={ProfileScreen}
   options={{
-    title: 'Profile',
+    title: '個人資料',
     headerLargeTitleEnabled: true,
     headerSearchBarOptions: {
-      placeholder: 'Search',
+      placeholder: '搜尋',
     },
   }}
 />
 ```
 
-Native headers support iOS large titles, search bars, blur effects, and proper
-safe area handling automatically.
+原生 header 自動支援 iOS 大標題 (large titles)、搜尋列、模糊效果以及正確的安全區域 (safe area) 處理。
 
-### Why Native Navigators
+### 為什麼選擇原生導航器
 
-- **Performance**: Native transitions and gestures run on the UI thread
-- **Platform behavior**: Automatic iOS large titles, Android material design
-- **System integration**: Scroll-to-top on tab tap, PiP avoidance, proper safe
-  areas
-- **Accessibility**: Platform accessibility features work automatically
+- **效能**：原生轉換和手勢在 UI 執行緒上運行
+- **平台行為**：自動支援 iOS 大標題、Android Material Design
+- **系統整合**：點擊分頁標籤可捲動至頂部、避免 PiP (畫中畫)、正確的安全區域
+- **無障礙功能**：自動支援平台的無障礙功能
 
-Reference:
+參考資料：
 
 - [React Navigation Native Stack](https://reactnavigation.org/docs/native-stack-navigator)
-- [React Native Bottom Tabs with React Navigation](https://oss.callstack.com/react-native-bottom-tabs/docs/guides/usage-with-react-navigation)
-- [React Native Bottom Tabs with Expo Router](https://oss.callstack.com/react-native-bottom-tabs/docs/guides/usage-with-expo-router)
+- [React Navigation Native Bottom Tabs](https://oss.callstack.com/react-native-bottom-tabs/docs/guides/usage-with-react-navigation)
 - [Expo Router Native Tabs](https://docs.expo.dev/router/advanced/native-tabs)

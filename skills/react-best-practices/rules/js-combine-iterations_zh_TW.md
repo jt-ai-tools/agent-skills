@@ -1,17 +1,17 @@
 ---
-title: Combine Multiple Array Iterations
+title: 合併多次陣列迭代 (Combine Multiple Array Iterations)
 impact: LOW-MEDIUM
-impactDescription: reduces iterations
+impactDescription: 減少迭代次數 (reduces iterations)
 tags: javascript, arrays, loops, performance
 ---
 
-[繁體中文版 (Traditional Chinese)](./js-combine-iterations_zh_TW.md)
+[English Version](./js-combine-iterations.md)
 
-## Combine Multiple Array Iterations
+## 合併多次陣列迭代 (Combine Multiple Array Iterations)
 
-Multiple `.filter()` or `.map()` calls iterate the array multiple times. Combine into one loop.
+多次呼叫 `.filter()` 或 `.map()` 會對陣列進行多次迭代。應將其合併為單次迴圈。
 
-**Incorrect (3 iterations):**
+**不正確 (3 次迭代)：**
 
 ```typescript
 const admins = users.filter(u => u.isAdmin)
@@ -19,7 +19,7 @@ const testers = users.filter(u => u.isTester)
 const inactive = users.filter(u => !u.isActive)
 ```
 
-**Correct (1 iteration):**
+**正確 (1 次迭代)：**
 
 ```typescript
 const admins: User[] = []

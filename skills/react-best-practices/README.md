@@ -1,5 +1,7 @@
 # React Best Practices
 
+[繁體中文版 (Traditional Chinese)](./README_zh_TW.md)
+
 A structured repository for creating and maintaining React Best Practices optimized for agents and LLMs.
 
 ## Structure

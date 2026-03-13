@@ -119,7 +119,7 @@
 | skills/react-native-skills/rules/state-ground-truth.md | 已完成 | |
 | skills/react-native-skills/rules/ui-expo-image.md | 已完成 | |
 | skills/react-native-skills/rules/ui-image-gallery.md | 已完成 | |
-| skills/react-native-skills/rules/ui-measure-views.md | 待處理 | |
+| skills/react-native-skills/rules/ui-measure-views.md | 已完成 | |
 | skills/react-native-skills/rules/ui-menus.md | 待處理 | |
 | skills/react-native-skills/rules/ui-native-modals.md | 待處理 | |
 | skills/react-native-skills/rules/ui-pressable.md | 待處理 | |

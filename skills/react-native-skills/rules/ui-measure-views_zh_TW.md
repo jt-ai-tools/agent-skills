@@ -1,20 +1,17 @@
 ---
-title: Measuring View Dimensions
+title: 測量 View 的尺寸
 impact: MEDIUM
-impactDescription: synchronous measurement, avoid unnecessary re-renders
+impactDescription: 同步測量，避免不必要的重新渲染
 tags: layout, measurement, onLayout, useLayoutEffect
 ---
 
-[繁體中文版 (Traditional Chinese)](./ui-measure-views_zh_TW.md)
+[English Version](./ui-measure-views.md)
 
-## Measuring View Dimensions
+## 測量 View 的尺寸
 
-Use both `useLayoutEffect` (synchronous) and `onLayout` (for updates). The sync
-measurement gives you the initial size immediately; `onLayout` keeps it current
-when the view changes. For non-primitive states, use a dispatch updater to
-compare values and avoid unnecessary re-renders.
+同時使用 `useLayoutEffect`（同步）和 `onLayout`（用於更新）。同步測量可以讓你立即獲得初始尺寸；`onLayout` 則在 View 發生變化時保持尺寸最新。對於非基本類型 (non-primitive) 的狀態，請使用 dispatch updater（函數式更新）來比較數值，以避免不必要的重新渲染。
 
-**Height only:**
+**僅測量高度：**
 
 ```tsx
 import { useLayoutEffect, useRef, useState } from 'react'
@@ -25,10 +22,10 @@ function MeasuredBox({ children }: { children: React.ReactNode }) {
   const [height, setHeight] = useState<number | undefined>(undefined)
 
   useLayoutEffect(() => {
-    // Sync measurement on mount (RN 0.82+)
+    // 掛載時的同步測量 (RN 0.82+)
     const rect = ref.current?.getBoundingClientRect()
     if (rect) setHeight(rect.height)
-    // Pre-0.82: ref.current?.measure((x, y, w, h) => setHeight(h))
+    // 0.82 版本之前：ref.current?.measure((x, y, w, h) => setHeight(h))
   }, [])
 
   const onLayout = (e: LayoutChangeEvent) => {
@@ -43,7 +40,7 @@ function MeasuredBox({ children }: { children: React.ReactNode }) {
 }
 ```
 
-**Both dimensions:**
+**測量寬度與高度：**
 
 ```tsx
 import { useLayoutEffect, useRef, useState } from 'react'
@@ -63,7 +60,7 @@ function MeasuredBox({ children }: { children: React.ReactNode }) {
   const onLayout = (e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout
     setSize((prev) => {
-      // for non-primitive states, compare values before firing a re-render
+      // 對於非基本類型的狀態，在觸發重新渲染前比較數值
       if (prev?.width === width && prev?.height === height) return prev
       return { width, height }
     })
@@ -77,4 +74,4 @@ function MeasuredBox({ children }: { children: React.ReactNode }) {
 }
 ```
 
-Use functional setState to compare—don't read state directly in the callback.
+請使用函數式 `setState` 進行比較——不要在回調函數中直接讀取狀態。

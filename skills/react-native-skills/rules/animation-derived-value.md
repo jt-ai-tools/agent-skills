@@ -5,6 +5,8 @@ impactDescription: cleaner code, automatic dependency tracking
 tags: animation, reanimated, derived-value
 ---
 
+[繁體中文版 (Traditional Chinese)](./animation-derived-value_zh_TW.md)
+
 ## Prefer useDerivedValue Over useAnimatedReaction
 
 When deriving a shared value from another, use `useDerivedValue` instead of

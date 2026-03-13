@@ -13,6 +13,8 @@ metadata:
 
 # React Native Skills
 
+[繁體中文版 (Traditional Chinese)](./SKILL_zh_TW.md)
+
 Comprehensive best practices for React Native and Expo applications. Contains
 rules across multiple categories covering performance, animations, UI patterns,
 and platform-specific optimizations.

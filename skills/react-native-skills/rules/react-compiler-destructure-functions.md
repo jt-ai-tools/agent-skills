@@ -5,6 +5,8 @@ impactDescription: stable references, fewer re-renders
 tags: rerender, hooks, performance, react-compiler
 ---
 
+[繁體中文版 (Traditional Chinese)](./react-compiler-destructure-functions_zh_TW.md)
+
 ## Destructure Functions Early in Render
 
 This rule is only applicable if you are using the React Compiler.

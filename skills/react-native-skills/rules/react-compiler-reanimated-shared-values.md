@@ -5,6 +5,8 @@ impactDescription: required for React Compiler compatibility
 tags: reanimated, react-compiler, shared-values
 ---
 
+[繁體中文版 (Traditional Chinese)](./react-compiler-reanimated-shared-values_zh_TW.md)
+
 ## Use .get() and .set() for Shared Values with React Compiler
 
 With React Compiler enabled, use `.get()` and `.set()` instead of reading or

@@ -109,7 +109,7 @@
 | skills/react-native-skills/rules/monorepo-single-dependency-versions.md | 已完成 | |
 | skills/react-native-skills/rules/navigation-native-navigators.md | 已完成 | |
 | skills/react-native-skills/rules/react-compiler-destructure-functions.md | 已完成 | |
-| skills/react-native-skills/rules/react-compiler-reanimated-shared-values.md | 待處理 | |
+| skills/react-native-skills/rules/react-compiler-reanimated-shared-values.md | 已完成 | |
 | skills/react-native-skills/rules/react-state-dispatcher.md | 待處理 | |
 | skills/react-native-skills/rules/react-state-fallback.md | 待處理 | |
 | skills/react-native-skills/rules/react-state-minimize.md | 待處理 | |

@@ -85,7 +85,7 @@
 | skills/react-best-practices/rules/server-hoist-static-io.md | 已完成 | |
 | skills/react-best-practices/rules/server-parallel-fetching.md | 已完成 | |
 | skills/react-best-practices/rules/server-serialization.md | 已完成 | |
-| skills/react-native-skills/AGENTS.md | 待處理 | |
+| skills/react-native-skills/AGENTS.md | 已完成 | |
 | skills/react-native-skills/README.md | 已完成 | |
 | skills/react-native-skills/SKILL.md | 已完成 | |
 | skills/react-native-skills/rules/_sections.md | 已完成 | |

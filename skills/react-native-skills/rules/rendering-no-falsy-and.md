@@ -5,6 +5,8 @@ impactDescription: prevents production crash
 tags: rendering, conditional, jsx, crash
 ---
 
+[繁體中文版 (Traditional Chinese)](./rendering-no-falsy-and_zh_TW.md)
+
 ## Never Use && with Potentially Falsy Values
 
 Never use `{value && <Component />}` when `value` could be an empty string or

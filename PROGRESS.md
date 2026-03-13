@@ -36,7 +36,7 @@
 | skills/react-best-practices/rules/bundle-defer-third-party.md | 已完成 | |
 | skills/react-best-practices/rules/bundle-dynamic-imports.md | 已完成 | |
 | skills/react-best-practices/rules/bundle-preload.md | 已完成 | |
-| skills/react-best-practices/rules/client-event-listeners.md | 待處理 | |
+| skills/react-best-practices/rules/client-event-listeners.md | 已完成 | |
 | skills/react-best-practices/rules/client-localstorage-schema.md | 待處理 | |
 | skills/react-best-practices/rules/client-passive-event-listeners.md | 待處理 | |
 | skills/react-best-practices/rules/client-swr-dedup.md | 待處理 | |

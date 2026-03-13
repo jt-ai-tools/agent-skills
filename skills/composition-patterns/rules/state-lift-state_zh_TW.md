@@ -1,21 +1,17 @@
 ---
-title: Lift State into Provider Components
+title: 將狀態提升至 Provider 元件 (Lift State into Provider Components)
 impact: HIGH
-impactDescription: enables state sharing outside component boundaries
+impactDescription: 實現元件邊界外的狀態共享
 tags: composition, state, context, providers
 ---
 
-# Lift State into Provider Components
+# 將狀態提升至 Provider 元件 (Lift State into Provider Components)
 
-[繁體中文版 (Traditional Chinese)](./state-lift-state_zh_TW.md)
+[English Version](./state-lift-state.md)
 
-## Lift State into Provider Components
+將狀態管理移至專用的 Provider 元件中。這允許主 UI 之外的同層元件存取並修改狀態，而無需屬性鑽取 (prop drilling) 或彆扭的 Ref。
 
-Move state management into dedicated provider components. This allows sibling
-components outside the main UI to access and modify state without prop drilling
-or awkward refs.
-
-**Incorrect (state trapped inside component):**
+**錯誤示例 (狀態困在元件內部)：**
 
 ```tsx
 function ForwardMessageComposer() {
@@ -30,22 +26,22 @@ function ForwardMessageComposer() {
   )
 }
 
-// Problem: How does this button access composer state?
+// 問題：此按鈕如何存取編輯器的狀態？
 function ForwardMessageDialog() {
   return (
     <Dialog>
       <ForwardMessageComposer />
-      <MessagePreview /> {/* Needs composer state */}
+      <MessagePreview /> {/* 需要編輯器狀態 */}
       <DialogActions>
         <CancelButton />
-        <ForwardButton /> {/* Needs to call submit */}
+        <ForwardButton /> {/* 需要呼叫提交 (submit) */}
       </DialogActions>
     </Dialog>
   )
 }
 ```
 
-**Incorrect (useEffect to sync state up):**
+**錯誤示例 (使用 useEffect 同步狀態)：**
 
 ```tsx
 function ForwardMessageDialog() {
@@ -61,12 +57,12 @@ function ForwardMessageDialog() {
 function ForwardMessageComposer({ onInputChange }) {
   const [state, setState] = useState(initialState)
   useEffect(() => {
-    onInputChange(state.input) // Sync on every change 😬
+    onInputChange(state.input) // 每次變更都同步 😬
   }, [state.input])
 }
 ```
 
-**Incorrect (reading state from ref on submit):**
+**錯誤示例 (在提交時從 Ref 讀取狀態)：**
 
 ```tsx
 function ForwardMessageDialog() {
@@ -80,7 +76,7 @@ function ForwardMessageDialog() {
 }
 ```
 
-**Correct (state lifted to provider):**
+**正確示例 (狀態提升至 Provider)：**
 
 ```tsx
 function ForwardMessageProvider({ children }: { children: React.ReactNode }) {
@@ -104,10 +100,10 @@ function ForwardMessageDialog() {
     <ForwardMessageProvider>
       <Dialog>
         <ForwardMessageComposer />
-        <MessagePreview /> {/* Custom components can access state and actions */}
+        <MessagePreview /> {/* 自定義元件可以存取狀態與動作 */}
         <DialogActions>
           <CancelButton />
-          <ForwardButton /> {/* Custom components can access state and actions */}
+          <ForwardButton /> {/* 自定義元件可以存取狀態與動作 */}
         </DialogActions>
       </Dialog>
     </ForwardMessageProvider>
@@ -116,14 +112,10 @@ function ForwardMessageDialog() {
 
 function ForwardButton() {
   const { actions } = use(Composer.Context)
-  return <Button onPress={actions.submit}>Forward</Button>
+  return <Button onPress={actions.submit}>轉傳</Button>
 }
 ```
 
-The ForwardButton lives outside the Composer.Frame but still has access to the
-submit action because it's within the provider. Even though it's a one-off
-component, it can still access the composer's state and actions from outside the
-UI itself.
+`ForwardButton` 位於 `Composer.Frame` 之外，但由於它在 Provider 內，因此仍可存取提交動作。即便它是個一次性的元件，它仍能從 UI 本身之外存取編輯器的狀態與動作。
 
-**Key insight:** Components that need shared state don't have to be visually
-nested inside each other—they just need to be within the same provider.
+**關鍵見解：**需要共享狀態的元件不一定要在視覺上互相嵌套 —— 它們只需要在同一個 Provider 內即可。

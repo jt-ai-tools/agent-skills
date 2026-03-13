@@ -1,19 +1,17 @@
 ---
-title: Prefer Composing Children Over Render Props
+title: 優先使用子元件 (Children) 而非渲染屬性 (Render Props)
 impact: MEDIUM
-impactDescription: cleaner composition, better readability
-tags: composition, children, render-props
+impactDescription: 更清晰的組合，更好的可讀性
+tags: 組合, children, 渲染屬性
 ---
 
-[繁體中文版 (Traditional Chinese)](./patterns-children-over-render-props_zh_TW.md)
+[English Version](./patterns-children-over-render-props.md)
 
-## Prefer Children Over Render Props
+## 優先使用子元件而非渲染屬性 (Prefer Children Over Render Props)
 
-Use `children` for composition instead of `renderX` props. Children are more
-readable, compose naturally, and don't require understanding callback
-signatures.
+使用 `children` 進行組合，而不是使用 `renderX` 屬性。`children` 更具可讀性，組合起來更自然，且不需要理解回呼函數 (callback) 的簽署方式。
 
-**Incorrect (render props):**
+**不正確的做法 (渲染屬性)：**
 
 ```tsx
 function Composer({
@@ -35,7 +33,7 @@ function Composer({
   )
 }
 
-// Usage is awkward and inflexible
+// 用法笨拙且缺乏靈活性
 return (
   <Composer
     renderHeader={() => <CustomHeader />}
@@ -50,7 +48,7 @@ return (
 )
 ```
 
-**Correct (compound components with children):**
+**正確的做法 (使用 children 的複合元件)：**
 
 ```tsx
 function ComposerFrame({ children }: { children: React.ReactNode }) {
@@ -61,7 +59,7 @@ function ComposerFooter({ children }: { children: React.ReactNode }) {
   return <footer className='flex'>{children}</footer>
 }
 
-// Usage is flexible
+// 用法靈活
 return (
   <Composer.Frame>
     <CustomHeader />
@@ -75,15 +73,14 @@ return (
 )
 ```
 
-**When render props are appropriate:**
+**何時適合使用渲染屬性 (render props)：**
 
 ```tsx
-// Render props work well when you need to pass data back
+// 當你需要將數據回傳時，渲染屬性非常有用
 <List
   data={items}
   renderItem={({ item, index }) => <Item item={item} index={index} />}
 />
 ```
 
-Use render props when the parent needs to provide data or state to the child.
-Use children when composing static structure.
+當父元件需要向子元件提供數據或狀態時，請使用渲染屬性。當組合靜態結構時，請使用 `children`。

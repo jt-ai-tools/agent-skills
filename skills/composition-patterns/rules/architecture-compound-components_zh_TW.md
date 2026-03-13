@@ -1,19 +1,17 @@
 ---
-title: Use Compound Components
+title: 使用複合元件 (Compound Components)
 impact: HIGH
-impactDescription: enables flexible composition without prop drilling
-tags: composition, compound-components, architecture
+impactDescription: 實現靈活組合，避免屬性鑽取 (prop drilling)
+tags: 組合, 複合元件, 架構
 ---
 
-[繁體中文版 (Traditional Chinese)](./architecture-compound-components_zh_TW.md)
+[English Version](./architecture-compound-components.md)
 
-## Use Compound Components
+## 使用複合元件 (Use Compound Components)
 
-Structure complex components as compound components with a shared context. Each
-subcomponent accesses shared state via context, not props. Consumers compose the
-pieces they need.
+將複雜的元件結構設計為具有共享上下文 (context) 的複合元件 (compound components)。每個子元件透過上下文存取共享狀態，而不是透過屬性 (props)。使用者可以根據需求組合所需的片段。
 
-**Incorrect (monolithic component with render props):**
+**不正確的做法 (使用渲染屬性的單一龐大元件)：**
 
 ```tsx
 function Composer({
@@ -43,7 +41,7 @@ function Composer({
 }
 ```
 
-**Correct (compound components with shared context):**
+**正確的做法 (具有共享上下文的複合元件)：**
 
 ```tsx
 const ComposerContext = createContext<ComposerContextValue | null>(null)
@@ -79,10 +77,10 @@ function ComposerSubmit() {
   const {
     actions: { submit },
   } = use(ComposerContext)
-  return <Button onPress={submit}>Send</Button>
+  return <Button onPress={submit}>發送</Button>
 }
 
-// Export as compound component
+// 作為複合元件匯出
 const Composer = {
   Provider: ComposerProvider,
   Frame: ComposerFrame,
@@ -96,7 +94,7 @@ const Composer = {
 }
 ```
 
-**Usage:**
+**用法：**
 
 ```tsx
 <Composer.Provider state={state} actions={actions} meta={meta}>
@@ -111,4 +109,4 @@ const Composer = {
 </Composer.Provider>
 ```
 
-Consumers explicitly compose exactly what they need. No hidden conditionals. And the state, actions and meta are dependency-injected by a parent provider, allowing multiple usages of the same component structure.
+使用者可以明確地組合他們確切需要的內容，沒有隱藏的條件判斷。此外，狀態 (state)、操作 (actions) 和元數據 (meta) 是由父層供應者 (provider) 進行依賴注入的，這使得相同的元件結構可以被多次使用。

@@ -1,5 +1,7 @@
 # React Native Guidelines
 
+[繁體中文版 (Traditional Chinese)](./README_zh_TW.md)
+
 A structured repository for creating and maintaining React Native Best Practices
 optimized for agents and LLMs.
 

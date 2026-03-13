@@ -1,18 +1,17 @@
 ---
-title: Import from Design System Folder
+title: 從設計系統資料夾匯入
 impact: LOW
-impactDescription: enables global changes and easy refactoring
+impactDescription: 實現全域變更並簡化重構
 tags: imports, architecture, design-system
 ---
 
-[繁體中文版 (Traditional Chinese)](./imports-design-system-folder_zh_TW.md)
+[English Version](./imports-design-system-folder.md)
 
-## Import from Design System Folder
+## 從設計系統資料夾匯入
 
-Re-export dependencies from a design system folder. App code imports from there,
-not directly from packages. This enables global changes and easy refactoring.
+將依賴項從設計系統資料夾重新匯出 (re-export)。應用程式代碼從該處匯入，而不是直接從套件匯入。這使得全域變更和重構變得更加容易。
 
-**Incorrect (imports directly from package):**
+**錯誤做法 (直接從套件匯入):**
 
 ```tsx
 import { View, Text } from 'react-native'
@@ -28,13 +27,13 @@ function Profile() {
 }
 ```
 
-**Correct (imports from design system):**
+**正確做法 (從設計系統匯入):**
 
 ```tsx
 // components/view.tsx
 import { View as RNView } from 'react-native'
 
-// ideal: pick the props you will actually use to control implementation
+// 理想做法：挑選你實際會用到的 props 來控制實作
 export function View(
   props: Pick<React.ComponentProps<typeof RNView>, 'style' | 'children'>
 ) {
@@ -67,4 +66,4 @@ function Profile() {
 }
 ```
 
-Start by simply re-exporting. Customize later without changing app code.
+從簡單的重新匯出開始。日後可以在不更改應用程式代碼的情況下進行自定義。

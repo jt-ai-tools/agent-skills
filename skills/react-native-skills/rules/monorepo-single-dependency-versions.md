@@ -5,6 +5,8 @@ impactDescription: avoids duplicate bundles, version conflicts
 tags: monorepo, dependencies, installation
 ---
 
+[繁體中文版 (Traditional Chinese)](./monorepo-single-dependency-versions_zh_TW.md)
+
 ## Use Single Dependency Versions Across Monorepo
 
 Use a single version of each dependency across all packages in your monorepo.

@@ -1,20 +1,17 @@
 ---
-title: Use Native Modals Over JS-Based Bottom Sheets
+title: 優先使用原生 Modal 而非 JS 底層表單 (Bottom Sheets)
 impact: HIGH
-impactDescription: native performance, gestures, accessibility
+impactDescription: 原生效能、手勢、無障礙功能
 tags: modals, bottom-sheet, native, react-navigation
 ---
 
-[繁體中文版 (Traditional Chinese)](./ui-native-modals_zh_TW.md)
+[English Version](./ui-native-modals.md)
 
-## Use Native Modals Over JS-Based Bottom Sheets
+## 優先使用原生 Modal 而非 JS 底層表單 (Bottom Sheets)
 
-Use native `<Modal>` with `presentationStyle="formSheet"` or React Navigation
-v7's native form sheet instead of JS-based bottom sheet libraries. Native modals
-have built-in gestures, accessibility, and better performance. Rely on native UI
-for low-level primitives.
+使用帶有 `presentationStyle="formSheet"` 的原生 `<Modal>` 或 React Navigation v7 的原生 form sheet，而不是基於 JS 的底層表單 (bottom sheet) 函式庫。原生 Modal 內建了手勢、無障礙功能以及更好的效能。在低階元件上應依賴原生 UI。
 
-**Incorrect (JS-based bottom sheet):**
+**錯誤 (基於 JS 的底層表單):**
 
 ```tsx
 import BottomSheet from 'custom-js-bottom-sheet'
@@ -35,7 +32,7 @@ function MyScreen() {
 }
 ```
 
-**Correct (native Modal with formSheet):**
+**正確 (帶有 formSheet 的原生 Modal):**
 
 ```tsx
 import { Modal, View, Text, Button } from 'react-native'
@@ -61,10 +58,10 @@ function MyScreen() {
 }
 ```
 
-**Correct (React Navigation v7 native form sheet):**
+**正確 (React Navigation v7 原生 form sheet):**
 
 ```tsx
-// In your navigator
+// 在您的導覽器 (navigator) 中
 <Stack.Screen
   name='Details'
   component={DetailsScreen}
@@ -75,5 +72,4 @@ function MyScreen() {
 />
 ```
 
-Native modals provide swipe-to-dismiss, proper keyboard avoidance, and
-accessibility out of the box.
+原生 Modal 開箱即用，提供滑動關閉、正確的鍵盤避讓以及無障礙功能。

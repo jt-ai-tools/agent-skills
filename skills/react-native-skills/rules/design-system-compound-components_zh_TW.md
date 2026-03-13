@@ -1,21 +1,17 @@
 ---
-title: Use Compound Components Over Polymorphic Children
+title: 優先使用複合組件而非多型子元素
 impact: MEDIUM
-impactDescription: flexible composition, clearer API
+impactDescription: 彈性的組合方式，更清晰的 API
 tags: design-system, components, composition
 ---
 
-[繁體中文版 (Traditional Chinese)](./design-system-compound-components_zh_TW.md)
+[English Version](./design-system-compound-components.md)
 
-## Use Compound Components Over Polymorphic Children
+## 優先使用複合組件（Compound Components）而非多型子元素
 
-Don't create components that can accept a string if they aren't a text node. If
-a component can receive a string child, it must be a dedicated `*Text`
-component. For components like buttons, which can have both a View (or
-Pressable) together with text, use compound components, such a `Button`,
-`ButtonText`, and `ButtonIcon`.
+如果一個組件不是文字節點（text node），請不要將其設計為可接收字串。如果組件需要接收字串子元素，則必須是一個專門的 `*Text` 組件。對於像按鈕這樣同時包含 View（或 Pressable）與文字的組件，應使用複合組件，例如 `Button`、`ButtonText` 和 `ButtonIcon`。
 
-**Incorrect (polymorphic children):**
+**不正確（多型子元素）：**
 
 ```tsx
 import { Pressable, Text } from 'react-native'
@@ -34,12 +30,12 @@ function Button({ children, icon }: ButtonProps) {
   )
 }
 
-// Usage is ambiguous
+// 用法模糊不清
 <Button icon={<Icon />}>Save</Button>
 <Button><CustomText>Save</CustomText></Button>
 ```
 
-**Correct (compound components):**
+**正確（複合組件）：**
 
 ```tsx
 import { Pressable, Text } from 'react-native'
@@ -56,7 +52,7 @@ function ButtonIcon({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
 
-// Usage is explicit and composable
+// 用法明確且具備組合性
 <Button>
   <ButtonIcon><SaveIcon /></ButtonIcon>
   <ButtonText>Save</ButtonText>

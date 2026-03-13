@@ -2,7 +2,7 @@
 
 | 檔案路徑 | 狀態 | 備註 |
 | :--- | :--- | :--- |
-| AGENTS.md | 待處理 | |
+| AGENTS.md | 已完成 | |
 | README.md | 已完成 | |
 | skills/composition-patterns/AGENTS.md | 待處理 | |
 | skills/composition-patterns/README.md | 待處理 | |

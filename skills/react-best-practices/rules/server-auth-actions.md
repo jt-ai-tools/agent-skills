@@ -5,6 +5,8 @@ impactDescription: prevents unauthorized access to server mutations
 tags: server, server-actions, authentication, security, authorization
 ---
 
+[繁體中文版 (Traditional Chinese)](./server-auth-actions_zh_TW.md)
+
 ## Authenticate Server Actions Like API Routes
 
 **Impact: CRITICAL (prevents unauthorized access to server mutations)**

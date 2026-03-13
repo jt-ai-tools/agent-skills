@@ -7,7 +7,7 @@
 | skills/composition-patterns/AGENTS.md | 已完成 | |
 | skills/composition-patterns/README.md | 已完成 | |
 | skills/composition-patterns/SKILL.md | 已完成 | |
-| skills/composition-patterns/rules/_sections.md | 待處理 | |
+| skills/composition-patterns/rules/_sections.md | 已完成 | |
 | skills/composition-patterns/rules/_template.md | 待處理 | |
 | skills/composition-patterns/rules/architecture-avoid-boolean-props.md | 待處理 | |
 | skills/composition-patterns/rules/architecture-compound-components.md | 待處理 | |

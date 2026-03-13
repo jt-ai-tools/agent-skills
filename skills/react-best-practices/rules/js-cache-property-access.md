@@ -5,6 +5,8 @@ impactDescription: reduces lookups
 tags: javascript, loops, optimization, caching
 ---
 
+[繁體中文版 (Traditional Chinese)](./js-cache-property-access_zh_TW.md)
+
 ## Cache Property Access in Loops
 
 Cache object property lookups in hot paths.

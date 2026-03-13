@@ -41,8 +41,8 @@
 | skills/react-best-practices/rules/client-passive-event-listeners.md | 已完成 | |
 | skills/react-best-practices/rules/client-swr-dedup.md | 已完成 | |
 | skills/react-best-practices/rules/js-batch-dom-css.md | 已完成 | |
-| skills/react-best-practices/rules/js-cache-function-results.md | 待處理 | |
-| skills/react-best-practices/rules/js-cache-property-access.md | 待處理 | |
+| skills/react-best-practices/rules/js-cache-function-results.md | 已完成 | |
+| skills/react-best-practices/rules/js-cache-property-access.md | 已完成 | |
 | skills/react-best-practices/rules/js-cache-storage.md | 待處理 | |
 | skills/react-best-practices/rules/js-combine-iterations.md | 待處理 | |
 | skills/react-best-practices/rules/js-early-exit.md | 待處理 | |

@@ -5,6 +5,8 @@ impactDescription: prevents remount on every render
 tags: rerender, components, remount, performance
 ---
 
+[繁體中文版 (Traditional Chinese)](./rerender-no-inline-components_zh_TW.md)
+
 ## Don't Define Components Inside Components
 
 **Impact: HIGH (prevents remount on every render)**

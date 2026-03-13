@@ -102,7 +102,7 @@
 | skills/react-native-skills/rules/list-performance-images.md | 已完成 | |
 | skills/react-native-skills/rules/list-performance-inline-objects.md | 已完成 | |
 | skills/react-native-skills/rules/list-performance-item-expensive.md | 已完成 | |
-| skills/react-native-skills/rules/list-performance-item-memo.md | 待處理 | |
+| skills/react-native-skills/rules/list-performance-item-memo.md | 已完成 | |
 | skills/react-native-skills/rules/list-performance-item-types.md | 待處理 | |
 | skills/react-native-skills/rules/list-performance-virtualize.md | 待處理 | |
 | skills/react-native-skills/rules/monorepo-native-deps-in-app.md | 待處理 | |

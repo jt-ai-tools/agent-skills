@@ -5,6 +5,8 @@ impactDescription: enables effective memo() comparison
 tags: lists, performance, memo, primitives
 ---
 
+[繁體中文版 (Traditional Chinese)](./list-performance-item-memo_zh_TW.md)
+
 ## Pass Primitives to List Items for Memoization
 
 When possible, pass only primitive values (strings, numbers, booleans) as props

@@ -5,6 +5,8 @@ impactDescription: reduces re-render frequency
 tags: rerender, derived-state, media-query, optimization
 ---
 
+[繁體中文版 (Traditional Chinese)](./rerender-derived-state_zh_TW.md)
+
 ## Subscribe to Derived State
 
 Subscribe to derived boolean state instead of continuous values to reduce re-render frequency.

@@ -67,7 +67,7 @@
 | skills/react-best-practices/rules/rerender-defer-reads.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-dependencies.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-derived-state-no-effect.md | 已完成 | |
-| skills/react-best-practices/rules/rerender-derived-state.md | 待處理 | |
+| skills/react-best-practices/rules/rerender-derived-state.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-functional-setstate.md | 待處理 | |
 | skills/react-best-practices/rules/rerender-lazy-state-init.md | 待處理 | |
 | skills/react-best-practices/rules/rerender-memo-with-default-value.md | 待處理 | |

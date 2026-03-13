@@ -5,6 +5,8 @@ impactDescription: memory efficiency, caching, blurhash placeholders, progressiv
 tags: images, performance, expo-image, ui
 ---
 
+[繁體中文版 (Traditional Chinese)](./ui-expo-image_zh_TW.md)
+
 ## Use expo-image for Optimized Images
 
 Use `expo-image` instead of React Native's `Image`. It provides memory-efficient caching, blurhash placeholders, progressive loading, and better performance for lists.

@@ -5,6 +5,8 @@ impactDescription: virtualization relies on reference stability
 tags: lists, performance, flatlist, virtualization
 ---
 
+[繁體中文版 (Traditional Chinese)](./list-performance-function-references_zh_TW.md)
+
 ## Optimize List Performance with Stable Object References
 
 Don't map or filter data before passing to virtualized lists. Virtualization

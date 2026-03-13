@@ -5,6 +5,8 @@ impactDescription: preserves state/DOM
 tags: rendering, activity, visibility, state-preservation
 ---
 
+[繁體中文版 (Traditional Chinese)](./rendering-activity_zh_TW.md)
+
 ## Use Activity Component for Show/Hide
 
 Use React's `<Activity>` to preserve state/DOM for expensive components that frequently toggle visibility.

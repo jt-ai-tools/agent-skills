@@ -83,7 +83,7 @@
 | skills/react-best-practices/rules/server-cache-react.md | 已完成 | |
 | skills/react-best-practices/rules/server-dedup-props.md | 已完成 | |
 | skills/react-best-practices/rules/server-hoist-static-io.md | 已完成 | |
-| skills/react-best-practices/rules/server-parallel-fetching.md | 待處理 | |
+| skills/react-best-practices/rules/server-parallel-fetching.md | 已完成 | |
 | skills/react-best-practices/rules/server-serialization.md | 待處理 | |
 | skills/react-native-skills/AGENTS.md | 待處理 | |
 | skills/react-native-skills/README.md | 待處理 | |

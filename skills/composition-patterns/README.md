@@ -1,5 +1,7 @@
 # React Composition Patterns
 
+[繁體中文版 (Traditional Chinese)](./README_zh_TW.md)
+
 A structured repository for React composition patterns that scale. These
 patterns help avoid boolean prop proliferation by using compound components,
 lifting state, and composing internals.

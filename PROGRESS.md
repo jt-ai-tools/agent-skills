@@ -5,7 +5,7 @@
 | AGENTS.md | 已完成 | |
 | README.md | 已完成 | |
 | skills/composition-patterns/AGENTS.md | 已完成 | |
-| skills/composition-patterns/README.md | 待處理 | |
+| skills/composition-patterns/README.md | 已完成 | |
 | skills/composition-patterns/SKILL.md | 待處理 | |
 | skills/composition-patterns/rules/_sections.md | 待處理 | |
 | skills/composition-patterns/rules/_template.md | 待處理 | |

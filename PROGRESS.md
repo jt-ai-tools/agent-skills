@@ -75,7 +75,7 @@
 | skills/react-best-practices/rules/rerender-move-effect-to-event.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-no-inline-components.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-simple-expression-in-memo.md | 已完成 | |
-| skills/react-best-practices/rules/rerender-transitions.md | 待處理 | |
+| skills/react-best-practices/rules/rerender-transitions.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-use-ref-transient-values.md | 待處理 | |
 | skills/react-best-practices/rules/server-after-nonblocking.md | 待處理 | |
 | skills/react-best-practices/rules/server-auth-actions.md | 待處理 | |

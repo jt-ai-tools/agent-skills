@@ -1,17 +1,17 @@
 ---
-title: Use Transitions for Non-Urgent Updates
+title: 對非緊急更新使用 Transition
 impact: MEDIUM
-impactDescription: maintains UI responsiveness
+impactDescription: 保持 UI 響應性
 tags: rerender, transitions, startTransition, performance
 ---
 
-[繁體中文版 (Traditional Chinese)](./rerender-transitions_zh_TW.md)
+[English Version](./rerender-transitions.md)
 
-## Use Transitions for Non-Urgent Updates
+## 對非緊急更新使用 Transition
 
-Mark frequent, non-urgent state updates as transitions to maintain UI responsiveness.
+將頻繁且非緊急的狀態更新標記為 Transition，以保持 UI 的響應性。
 
-**Incorrect (blocks UI on every scroll):**
+**錯誤（每次捲動時都會阻塞 UI）：**
 
 ```tsx
 function ScrollTracker() {
@@ -24,7 +24,7 @@ function ScrollTracker() {
 }
 ```
 
-**Correct (non-blocking updates):**
+**正確（非阻塞更新）：**
 
 ```tsx
 import { startTransition } from 'react'

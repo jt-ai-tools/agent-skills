@@ -1,20 +1,17 @@
 ---
-title: Use GestureDetector for Animated Press States
+title: 使用 GestureDetector 處理動畫按壓狀態
 impact: MEDIUM
-impactDescription: UI thread animations, smoother press feedback
+impactDescription: UI 執行緒動畫，更流暢的按壓回饋
 tags: animation, gestures, press, reanimated
 ---
 
-[繁體中文版 (Traditional Chinese)](./animation-gesture-detector-press_zh_TW.md)
+[English Version](./animation-gesture-detector-press.md)
 
-## Use GestureDetector for Animated Press States
+## 使用 GestureDetector 處理動畫按壓狀態
 
-For animated press states (scale, opacity on press), use `GestureDetector` with
-`Gesture.Tap()` and shared values instead of Pressable's
-`onPressIn`/`onPressOut`. Gesture callbacks run on the UI thread as worklets—no
-JS thread round-trip for press animations.
+對於動畫按壓狀態（按壓時的縮放、透明度），應使用 `GestureDetector` 搭配 `Gesture.Tap()` 和共用值（shared values），而不是使用 Pressable 的 `onPressIn`/`onPressOut`。手勢回呼（callback）作為 worklets 在 UI 執行緒上執行，按壓動畫無需經過 JS 執行緒的來回傳遞。
 
-**Incorrect (Pressable with JS thread callbacks):**
+**不正確（使用 JS 執行緒回呼的 Pressable）：**
 
 ```tsx
 import { Pressable } from 'react-native'
@@ -45,7 +42,7 @@ function AnimatedButton({ onPress }: { onPress: () => void }) {
 }
 ```
 
-**Correct (GestureDetector with UI thread worklets):**
+**正確（使用 UI 執行緒 worklets 的 GestureDetector）：**
 
 ```tsx
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
@@ -58,7 +55,7 @@ import Animated, {
 } from 'react-native-reanimated'
 
 function AnimatedButton({ onPress }: { onPress: () => void }) {
-  // Store the press STATE (0 = not pressed, 1 = pressed)
+  // 儲存按壓狀態（0 = 未按壓，1 = 已按壓）
   const pressed = useSharedValue(0)
 
   const tap = Gesture.Tap()
@@ -72,7 +69,7 @@ function AnimatedButton({ onPress }: { onPress: () => void }) {
       runOnJS(onPress)()
     })
 
-  // Derive visual values from the state
+  // 從狀態推導視覺數值
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       { scale: interpolate(withTiming(pressed.get()), [0, 1], [1, 0.95]) },
@@ -89,9 +86,7 @@ function AnimatedButton({ onPress }: { onPress: () => void }) {
 }
 ```
 
-Store the press **state** (0 or 1), then derive the scale via `interpolate`.
-This keeps the shared value as ground truth. Use `runOnJS` to call JS functions
-from worklets. Use `.set()` and `.get()` for React Compiler compatibility.
+儲存按壓**狀態**（0 或 1），然後透過 `interpolate` 推導縮放比例。這能保持共用值作為單一事實來源。使用 `runOnJS` 從 worklets 呼叫 JS 函數。使用 `.set()` 和 `.get()` 以確保與 React Compiler 相容。
 
-Reference:
+參考資料：
 [Gesture Handler Tap Gesture](https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/tap-gesture)

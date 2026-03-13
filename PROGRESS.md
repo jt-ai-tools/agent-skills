@@ -91,7 +91,7 @@
 | skills/react-native-skills/rules/_sections.md | 待處理 | |
 | skills/react-native-skills/rules/_template.md | 待處理 | |
 | skills/react-native-skills/rules/animation-derived-value.md | 已完成 | |
-| skills/react-native-skills/rules/animation-gesture-detector-press.md | 待處理 | |
+| skills/react-native-skills/rules/animation-gesture-detector-press.md | 已完成 | |
 | skills/react-native-skills/rules/animation-gpu-properties.md | 待處理 | |
 | skills/react-native-skills/rules/design-system-compound-components.md | 待處理 | |
 | skills/react-native-skills/rules/fonts-config-plugin.md | 待處理 | |

@@ -1,20 +1,20 @@
 ---
-title: Avoid Layout Thrashing
+title: 避免佈局抖動 (Layout Thrashing)
 impact: MEDIUM
-impactDescription: prevents forced synchronous layouts and reduces performance bottlenecks
+impactDescription: 防止強制的同步佈局並減少效能瓶頸
 tags: javascript, dom, css, performance, reflow, layout-thrashing
 ---
 
-[繁體中文版 (Traditional Chinese)](./js-batch-dom-css_zh_TW.md)
+[English Version](./js-batch-dom-css.md)
 
-## Avoid Layout Thrashing
+## 避免佈局抖動 (Layout Thrashing)
 
-Avoid interleaving style writes with layout reads. When you read a layout property (like `offsetWidth`, `getBoundingClientRect()`, or `getComputedStyle()`) between style changes, the browser is forced to trigger a synchronous reflow.
+避免將樣式寫入與佈局讀取交替進行。當你在樣式變更之間讀取佈局屬性（例如 `offsetWidth`、`getBoundingClientRect()` 或 `getComputedStyle()`）時，瀏覽器會被迫觸發同步重排（reflow）。
 
-**This is OK (browser batches style changes):**
+**這沒問題（瀏覽器會批次處理樣式變更）：**
 ```typescript
 function updateElementStyles(element: HTMLElement) {
-  // Each line invalidates style, but browser batches the recalculation
+  // 每行都會使樣式失效，但瀏覽器會批次進行重新計算
   element.style.width = '100px'
   element.style.height = '200px'
   element.style.backgroundColor = 'blue'
@@ -22,45 +22,45 @@ function updateElementStyles(element: HTMLElement) {
 }
 ```
 
-**Incorrect (interleaved reads and writes force reflows):**
+**錯誤做法（交替讀取和寫入會強制觸發重排）：**
 ```typescript
 function layoutThrashing(element: HTMLElement) {
   element.style.width = '100px'
-  const width = element.offsetWidth  // Forces reflow
+  const width = element.offsetWidth  // 強制觸發重排
   element.style.height = '200px'
-  const height = element.offsetHeight  // Forces another reflow
+  const height = element.offsetHeight  // 再次強制觸發重排
 }
 ```
 
-**Correct (batch writes, then read once):**
+**正確做法（批次寫入，然後讀取一次）：**
 ```typescript
 function updateElementStyles(element: HTMLElement) {
-  // Batch all writes together
+  // 將所有寫入批次放在一起
   element.style.width = '100px'
   element.style.height = '200px'
   element.style.backgroundColor = 'blue'
   element.style.border = '1px solid black'
   
-  // Read after all writes are done (single reflow)
+  // 在所有寫入完成後讀取（單次重排）
   const { width, height } = element.getBoundingClientRect()
 }
 ```
 
-**Correct (batch reads, then writes):**
+**正確做法（批次讀取，然後寫入）：**
 ```typescript
 function avoidThrashing(element: HTMLElement) {
-  // Read phase - all layout queries first
+  // 讀取階段 - 先進行所有佈局查詢
   const rect1 = element.getBoundingClientRect()
   const offsetWidth = element.offsetWidth
   const offsetHeight = element.offsetHeight
   
-  // Write phase - all style changes after
+  // 寫入階段 - 之後再進行所有樣式變更
   element.style.width = '100px'
   element.style.height = '200px'
 }
 ```
 
-**Better: use CSS classes**
+**更好：使用 CSS 類別（classes）**
 ```css
 .highlighted-box {
   width: 100px;
@@ -77,16 +77,16 @@ function updateElementStyles(element: HTMLElement) {
 }
 ```
 
-**React example:**
+**React 範例：**
 ```tsx
-// Incorrect: interleaving style changes with layout queries
+// 錯誤做法：將樣式變更與佈局查詢交替進行
 function Box({ isHighlighted }: { isHighlighted: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
   
   useEffect(() => {
     if (ref.current && isHighlighted) {
       ref.current.style.width = '100px'
-      const width = ref.current.offsetWidth // Forces layout
+      const width = ref.current.offsetWidth // 強制觸發佈局
       ref.current.style.height = '200px'
     }
   }, [isHighlighted])
@@ -94,7 +94,7 @@ function Box({ isHighlighted }: { isHighlighted: boolean }) {
   return <div ref={ref}>Content</div>
 }
 
-// Correct: toggle class
+// 正確做法：切換類別
 function Box({ isHighlighted }: { isHighlighted: boolean }) {
   return (
     <div className={isHighlighted ? 'highlighted-box' : ''}>
@@ -104,6 +104,6 @@ function Box({ isHighlighted }: { isHighlighted: boolean }) {
 }
 ```
 
-Prefer CSS classes over inline styles when possible. CSS files are cached by the browser, and classes provide better separation of concerns and are easier to maintain.
+儘可能優先使用 CSS 類別而非行內樣式（inline styles）。CSS 檔案會被瀏覽器快取，且類別提供了更好的關注點分離，更易於維護。
 
-See [this gist](https://gist.github.com/paulirish/5d52fb081b3570c81e3a) and [CSS Triggers](https://csstriggers.com/) for more information on layout-forcing operations.
+欲了解更多關於強制佈局操作的資訊，請參閱[此 gist](https://gist.github.com/paulirish/5d52fb081b3570c81e3a) 和 [CSS Triggers](https://csstriggers.com/)。

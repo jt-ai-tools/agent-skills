@@ -69,7 +69,7 @@
 | skills/react-best-practices/rules/rerender-derived-state-no-effect.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-derived-state.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-functional-setstate.md | 已完成 | |
-| skills/react-best-practices/rules/rerender-lazy-state-init.md | 待處理 | |
+| skills/react-best-practices/rules/rerender-lazy-state-init.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-memo-with-default-value.md | 待處理 | |
 | skills/react-best-practices/rules/rerender-memo.md | 待處理 | |
 | skills/react-best-practices/rules/rerender-move-effect-to-event.md | 待處理 | |

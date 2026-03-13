@@ -5,6 +5,8 @@ impactDescription: wasted computation on every render
 tags: react, hooks, useState, performance, initialization
 ---
 
+[繁體中文版 (Traditional Chinese)](./rerender-lazy-state-init_zh_TW.md)
+
 ## Use Lazy State Initialization
 
 Pass a function to `useState` for expensive initial values. Without the function form, the initializer runs on every render even though the value is only used once.

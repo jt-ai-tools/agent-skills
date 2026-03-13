@@ -5,6 +5,8 @@ impactDescription: eliminates intermediate array
 tags: javascript, arrays, flatMap, filter, performance
 ---
 
+[繁體中文版 (Traditional Chinese)](./js-flatmap-filter_zh_TW.md)
+
 ## Use flatMap to Map and Filter in One Pass
 
 **Impact: LOW-MEDIUM (eliminates intermediate array)**

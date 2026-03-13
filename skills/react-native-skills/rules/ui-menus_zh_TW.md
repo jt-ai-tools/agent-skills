@@ -1,19 +1,17 @@
 ---
-title: Use Native Menus for Dropdowns and Context Menus
+title: 使用原生菜單製作下拉列表和上下文菜單
 impact: HIGH
-impactDescription: native accessibility, platform-consistent UX
+impactDescription: 原生無障礙支持、各平台一致的用戶體驗
 tags: user-interface, menus, context-menus, zeego, accessibility
 ---
 
-[繁體中文版 (Traditional Chinese)](./ui-menus_zh_TW.md)
+[English Version](./ui-menus.md)
 
-## Use Native Menus for Dropdowns and Context Menus
+## 使用原生菜單製作下拉列表和上下文菜單
 
-Use native platform menus instead of custom JS implementations. Native menus
-provide built-in accessibility, consistent platform UX, and better performance.
-Use [zeego](https://zeego.dev) for cross-platform native menus.
+請使用各平台的原生菜單，而不是自定義的 JS 實現。原生菜單提供內置的無障礙支持 (accessibility)、一致的平台用戶體驗 (UX) 以及更好的性能。請使用 [zeego](https://zeego.dev) 來實現跨平台的原生菜單。
 
-**Incorrect (custom JS menu):**
+**錯誤示範 (自定義 JS 菜單)：**
 
 ```tsx
 import { useState } from 'react'
@@ -25,15 +23,15 @@ function MyMenu() {
   return (
     <View>
       <Pressable onPress={() => setOpen(!open)}>
-        <Text>Open Menu</Text>
+        <Text>打開菜單</Text>
       </Pressable>
       {open && (
         <View style={{ position: 'absolute', top: 40 }}>
           <Pressable onPress={() => console.log('edit')}>
-            <Text>Edit</Text>
+            <Text>編輯</Text>
           </Pressable>
           <Pressable onPress={() => console.log('delete')}>
-            <Text>Delete</Text>
+            <Text>刪除</Text>
           </Pressable>
         </View>
       )}
@@ -42,7 +40,7 @@ function MyMenu() {
 }
 ```
 
-**Correct (native menu with zeego):**
+**正確示範 (使用 zeego 實現原生菜單)：**
 
 ```tsx
 import * as DropdownMenu from 'zeego/dropdown-menu'
@@ -52,13 +50,13 @@ function MyMenu() {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
         <Pressable>
-          <Text>Open Menu</Text>
+          <Text>打開菜單</Text>
         </Pressable>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Content>
         <DropdownMenu.Item key='edit' onSelect={() => console.log('edit')}>
-          <DropdownMenu.ItemTitle>Edit</DropdownMenu.ItemTitle>
+          <DropdownMenu.ItemTitle>編輯</DropdownMenu.ItemTitle>
         </DropdownMenu.Item>
 
         <DropdownMenu.Item
@@ -66,7 +64,7 @@ function MyMenu() {
           destructive
           onSelect={() => console.log('delete')}
         >
-          <DropdownMenu.ItemTitle>Delete</DropdownMenu.ItemTitle>
+          <DropdownMenu.ItemTitle>刪除</DropdownMenu.ItemTitle>
         </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
@@ -74,7 +72,7 @@ function MyMenu() {
 }
 ```
 
-**Context menu (long-press):**
+**上下文菜單 (長按觸發)：**
 
 ```tsx
 import * as ContextMenu from 'zeego/context-menu'
@@ -84,17 +82,17 @@ function MyContextMenu() {
     <ContextMenu.Root>
       <ContextMenu.Trigger>
         <View style={{ padding: 20 }}>
-          <Text>Long press me</Text>
+          <Text>長按我</Text>
         </View>
       </ContextMenu.Trigger>
 
       <ContextMenu.Content>
         <ContextMenu.Item key='copy' onSelect={() => console.log('copy')}>
-          <ContextMenu.ItemTitle>Copy</ContextMenu.ItemTitle>
+          <ContextMenu.ItemTitle>複製</ContextMenu.ItemTitle>
         </ContextMenu.Item>
 
         <ContextMenu.Item key='paste' onSelect={() => console.log('paste')}>
-          <ContextMenu.ItemTitle>Paste</ContextMenu.ItemTitle>
+          <ContextMenu.ItemTitle>粘貼</ContextMenu.ItemTitle>
         </ContextMenu.Item>
       </ContextMenu.Content>
     </ContextMenu.Root>
@@ -102,7 +100,7 @@ function MyContextMenu() {
 }
 ```
 
-**Checkbox items:**
+**複選框項目 (Checkbox items)：**
 
 ```tsx
 import * as DropdownMenu from 'zeego/dropdown-menu'
@@ -114,7 +112,7 @@ function SettingsMenu() {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
         <Pressable>
-          <Text>Settings</Text>
+          <Text>設置</Text>
         </Pressable>
       </DropdownMenu.Trigger>
 
@@ -125,7 +123,7 @@ function SettingsMenu() {
           onValueChange={() => setNotifications((prev) => !prev)}
         >
           <DropdownMenu.ItemIndicator />
-          <DropdownMenu.ItemTitle>Notifications</DropdownMenu.ItemTitle>
+          <DropdownMenu.ItemTitle>通知</DropdownMenu.ItemTitle>
         </DropdownMenu.CheckboxItem>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
@@ -133,7 +131,7 @@ function SettingsMenu() {
 }
 ```
 
-**Submenus:**
+**子菜單 (Submenus)：**
 
 ```tsx
 import * as DropdownMenu from 'zeego/dropdown-menu'
@@ -143,27 +141,27 @@ function MenuWithSubmenu() {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
         <Pressable>
-          <Text>Options</Text>
+          <Text>選項</Text>
         </Pressable>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Content>
         <DropdownMenu.Item key='home' onSelect={() => console.log('home')}>
-          <DropdownMenu.ItemTitle>Home</DropdownMenu.ItemTitle>
+          <DropdownMenu.ItemTitle>首頁</DropdownMenu.ItemTitle>
         </DropdownMenu.Item>
 
         <DropdownMenu.Sub>
           <DropdownMenu.SubTrigger key='more'>
-            <DropdownMenu.ItemTitle>More Options</DropdownMenu.ItemTitle>
+            <DropdownMenu.ItemTitle>更多選項</DropdownMenu.ItemTitle>
           </DropdownMenu.SubTrigger>
 
           <DropdownMenu.SubContent>
             <DropdownMenu.Item key='settings'>
-              <DropdownMenu.ItemTitle>Settings</DropdownMenu.ItemTitle>
+              <DropdownMenu.ItemTitle>設置</DropdownMenu.ItemTitle>
             </DropdownMenu.Item>
 
             <DropdownMenu.Item key='help'>
-              <DropdownMenu.ItemTitle>Help</DropdownMenu.ItemTitle>
+              <DropdownMenu.ItemTitle>幫助</DropdownMenu.ItemTitle>
             </DropdownMenu.Item>
           </DropdownMenu.SubContent>
         </DropdownMenu.Sub>
@@ -173,4 +171,4 @@ function MenuWithSubmenu() {
 }
 ```
 
-Reference: [Zeego Documentation](https://zeego.dev/components/dropdown-menu)
+參考資料：[Zeego 文件](https://zeego.dev/components/dropdown-menu)

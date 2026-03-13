@@ -1,18 +1,17 @@
 ---
-title: Load fonts natively at build time
+title: 在建置時原生載入字型
 impact: LOW
-impactDescription: fonts available at launch, no async loading
+impactDescription: 啟動時即可使用字型，無需非同步載入
 tags: fonts, expo, performance, config-plugin
 ---
 
-[繁體中文版 (Traditional Chinese)](./fonts-config-plugin_zh_TW.md)
+[English Version](./fonts-config-plugin.md)
 
-## Use Expo Config Plugin for Font Loading
+## 使用 Expo Config Plugin 進行字型載入
 
-Use the `expo-font` config plugin to embed fonts at build time instead of
-`useFonts` or `Font.loadAsync`. Embedded fonts are more efficient.
+使用 `expo-font` 設定插件 (config plugin) 在建置時嵌入字型，而不是使用 `useFonts` 或 `Font.loadAsync`。嵌入的字型效率更高。
 
-**Incorrect (async font loading):**
+**錯誤做法 (非同步字型載入):**
 
 ```tsx
 import { useFonts } from 'expo-font'
@@ -35,7 +34,7 @@ function App() {
 }
 ```
 
-**Correct (config plugin, fonts embedded at build):**
+**正確做法 (設定插件，字型在建置時嵌入):**
 
 ```json
 // app.json
@@ -57,7 +56,7 @@ function App() {
 import { Text, View } from 'react-native'
 
 function App() {
-  // No loading state needed—font is already available
+  // 不需要載入狀態 — 字型已經可以使用
   return (
     <View>
       <Text style={{ fontFamily: 'Geist-Bold' }}>Hello</Text>
@@ -66,8 +65,7 @@ function App() {
 }
 ```
 
-After adding fonts to the config plugin, run `npx expo prebuild` and rebuild the
-native app.
+在設定插件中加入字型後，請執行 `npx expo prebuild` 並重新建置原生應用程式。
 
-Reference:
+參考資料：
 [Expo Font Documentation](https://docs.expo.dev/versions/latest/sdk/font/)

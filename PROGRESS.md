@@ -12,7 +12,7 @@
 | skills/composition-patterns/rules/architecture-avoid-boolean-props.md | 已完成 | |
 | skills/composition-patterns/rules/architecture-compound-components.md | 已完成 | |
 | skills/composition-patterns/rules/patterns-children-over-render-props.md | 已完成 | |
-| skills/composition-patterns/rules/patterns-explicit-variants.md | 待處理 | |
+| skills/composition-patterns/rules/patterns-explicit-variants.md | 已完成 | |
 | skills/composition-patterns/rules/react19-no-forwardref.md | 待處理 | |
 | skills/composition-patterns/rules/state-context-interface.md | 待處理 | |
 | skills/composition-patterns/rules/state-decouple-implementation.md | 待處理 | |

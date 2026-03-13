@@ -20,7 +20,7 @@
 | skills/deploy-to-vercel/SKILL.md | 已完成 | |
 | skills/react-best-practices/AGENTS.md | 待處理 | |
 | skills/react-best-practices/README.md | 已完成 | |
-| skills/react-best-practices/SKILL.md | 待處理 | |
+| skills/react-best-practices/SKILL.md | 已完成 | |
 | skills/react-best-practices/rules/_sections.md | 待處理 | |
 | skills/react-best-practices/rules/_template.md | 待處理 | |
 | skills/react-best-practices/rules/advanced-event-handler-refs.md | 待處理 | |

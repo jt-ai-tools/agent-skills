@@ -48,7 +48,7 @@
 | skills/react-best-practices/rules/js-early-exit.md | 已完成 | |
 | skills/react-best-practices/rules/js-flatmap-filter.md | 已完成 | |
 | skills/react-best-practices/rules/js-hoist-regexp.md | 已完成 | |
-| skills/react-best-practices/rules/js-index-maps.md | 待處理 | |
+| skills/react-best-practices/rules/js-index-maps.md | 已完成 | |
 | skills/react-best-practices/rules/js-length-check-first.md | 待處理 | |
 | skills/react-best-practices/rules/js-min-max-loop.md | 待處理 | |
 | skills/react-best-practices/rules/js-set-map-lookups.md | 待處理 | |

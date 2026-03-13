@@ -5,6 +5,8 @@ impactDescription: 1M ops to 2K ops
 tags: javascript, map, indexing, optimization, performance
 ---
 
+[繁體中文版 (Traditional Chinese)](./js-index-maps_zh_TW.md)
+
 ## Build Index Maps for Repeated Lookups
 
 Multiple `.find()` calls by the same key should use a Map.

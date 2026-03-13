@@ -5,6 +5,10 @@ impactDescription: Optional description of impact (e.g., "20-50% improvement")
 tags: tag1, tag2
 ---
 
+# Rule Title Here
+
+[繁體中文版 (Traditional Chinese)](./_template_zh_TW.md)
+
 ## Rule Title Here
 
 **Impact: MEDIUM (optional impact description)**

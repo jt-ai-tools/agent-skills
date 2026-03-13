@@ -1,17 +1,17 @@
 ---
-title: Hoist RegExp Creation
+title: 提升正規表達式 (RegExp) 的建立位置 (Hoist RegExp Creation)
 impact: LOW-MEDIUM
-impactDescription: avoids recreation
+impactDescription: 避免重複建立 (avoids recreation)
 tags: javascript, regexp, optimization, memoization
 ---
 
-[繁體中文版 (Traditional Chinese)](./js-hoist-regexp_zh_TW.md)
+[English Version](./js-hoist-regexp.md)
 
-## Hoist RegExp Creation
+## 提升正規表達式 (RegExp) 的建立位置 (Hoist RegExp Creation)
 
-Don't create RegExp inside render. Hoist to module scope or memoize with `useMemo()`.
+不要在 render 函式內部建立正規表達式 (RegExp)。應將其提升 (Hoist) 到模組作用域，或使用 `useMemo()` 進行快取。
 
-**Incorrect (new RegExp every render):**
+**不正確 (每次 render 都建立新的 RegExp)：**
 
 ```tsx
 function Highlighter({ text, query }: Props) {
@@ -21,7 +21,7 @@ function Highlighter({ text, query }: Props) {
 }
 ```
 
-**Correct (memoize or hoist):**
+**正確 (快取或提升)：**
 
 ```tsx
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -36,9 +36,9 @@ function Highlighter({ text, query }: Props) {
 }
 ```
 
-**Warning (global regex has mutable state):**
+**警告 (全域正規表達式具有可變狀態)：**
 
-Global regex (`/g`) has mutable `lastIndex` state:
+全域正規表達式 (`/g`) 具有可變的 `lastIndex` 狀態：
 
 ```typescript
 const regex = /foo/g

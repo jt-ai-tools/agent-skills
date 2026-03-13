@@ -56,7 +56,7 @@
 | skills/react-best-practices/rules/rendering-activity.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-animate-svg-wrapper.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-conditional-render.md | 已完成 | |
-| skills/react-best-practices/rules/rendering-content-visibility.md | 待處理 | |
+| skills/react-best-practices/rules/rendering-content-visibility.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-hoist-jsx.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-hydration-no-flicker.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-hydration-suppress-warning.md | 已完成 | |
@@ -114,7 +114,7 @@
 | skills/react-native-skills/rules/react-state-fallback.md | 已完成 | |
 | skills/react-native-skills/rules/react-state-minimize.md | 已完成 | |
 | skills/react-native-skills/rules/rendering-no-falsy-and.md | 已完成 | |
-| skills/react-native-skills/rules/rendering-text-in-text-component.md | 待處理 | |
+| skills/react-native-skills/rules/rendering-text-in-text-component.md | 已完成 | |
 | skills/react-native-skills/rules/scroll-position-no-state.md | 已完成 | |
 | skills/react-native-skills/rules/state-ground-truth.md | 已完成 | |
 | skills/react-native-skills/rules/ui-expo-image.md | 已完成 | |

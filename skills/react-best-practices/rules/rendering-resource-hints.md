@@ -5,6 +5,8 @@ impactDescription: reduces load time for critical resources
 tags: rendering, preload, preconnect, prefetch, resource-hints
 ---
 
+[繁體中文版 (Traditional Chinese)](./rendering-resource-hints_zh_TW.md)
+
 ## Use React DOM Resource Hints
 
 **Impact: HIGH (reduces load time for critical resources)**

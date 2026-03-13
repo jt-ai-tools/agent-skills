@@ -126,4 +126,4 @@
 | skills/react-native-skills/rules/ui-safe-area-scroll.md | 待處理 | |
 | skills/react-native-skills/rules/ui-scrollview-content-inset.md | 待處理 | |
 | skills/react-native-skills/rules/ui-styling.md | 待處理 | |
-| skills/web-design-guidelines/SKILL.md | 待處理 | |
+| skills/web-design-guidelines/SKILL.md | 已完成 | |

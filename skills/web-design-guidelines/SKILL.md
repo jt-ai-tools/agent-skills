@@ -9,6 +9,8 @@ metadata:
 
 # Web Interface Guidelines
 
+[繁體中文版 (Traditional Chinese)](./SKILL_zh_TW.md)
+
 Review files for compliance with Web Interface Guidelines.
 
 ## How It Works

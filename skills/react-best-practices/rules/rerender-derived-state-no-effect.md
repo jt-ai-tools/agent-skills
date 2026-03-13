@@ -5,6 +5,8 @@ impactDescription: avoids redundant renders and state drift
 tags: rerender, derived-state, useEffect, state
 ---
 
+[繁體中文版 (Traditional Chinese)](./rerender-derived-state-no-effect_zh_TW.md)
+
 ## Calculate Derived State During Rendering
 
 If a value can be computed from current props/state, do not store it in state or update it in an effect. Derive it during render to avoid extra renders and state drift. Do not set state in effects solely in response to prop changes; prefer derived values or keyed resets instead.

@@ -1,17 +1,17 @@
 ---
-title: Use contentInsetAdjustmentBehavior for Safe Areas
+title: 使用 contentInsetAdjustmentBehavior 處理安全區域 (Safe Areas)
 impact: MEDIUM
-impactDescription: native safe area handling, no layout shifts
+impactDescription: 原生安全區域處理，無佈局偏移
 tags: safe-area, scrollview, layout
 ---
 
-[繁體中文版 (Traditional Chinese)](./ui-safe-area-scroll_zh_TW.md)
+[English Version](./ui-safe-area-scroll.md)
 
-## Use contentInsetAdjustmentBehavior for Safe Areas
+## 使用 contentInsetAdjustmentBehavior 處理安全區域 (Safe Areas)
 
-Use `contentInsetAdjustmentBehavior="automatic"` on the root ScrollView instead of wrapping content in SafeAreaView or manual padding. This lets iOS handle safe area insets natively with proper scroll behavior.
+在根部的 ScrollView 上使用 `contentInsetAdjustmentBehavior="automatic"`，而不是用 SafeAreaView 包裹內容或手動設置 padding。這可以讓 iOS 以正確的滾動行為原生處理安全區域的縮進 (insets)。
 
-**Incorrect (SafeAreaView wrapper):**
+**錯誤 (SafeAreaView 包裹層):**
 
 ```tsx
 import { SafeAreaView, ScrollView, View, Text } from 'react-native'
@@ -29,7 +29,7 @@ function MyScreen() {
 }
 ```
 
-**Incorrect (manual safe area padding):**
+**錯誤 (手動安全區域 padding):**
 
 ```tsx
 import { ScrollView, View, Text } from 'react-native'
@@ -48,7 +48,7 @@ function MyScreen() {
 }
 ```
 
-**Correct (native content inset adjustment):**
+**正確 (原生內容縮進調整):**
 
 ```tsx
 import { ScrollView, View, Text } from 'react-native'
@@ -64,4 +64,4 @@ function MyScreen() {
 }
 ```
 
-The native approach handles dynamic safe areas (keyboard, toolbars) and allows content to scroll behind the status bar naturally.
+原生方法可以處理動態安全區域（如鍵盤、工具欄），並允許內容自然地滾動到狀態欄後方。

@@ -5,6 +5,8 @@ impactDescription: cleaner logic, easier debugging, single source of truth
 tags: state, derived-state, reanimated, hooks
 ---
 
+[繁體中文版 (Traditional Chinese)](./state-ground-truth_zh_TW.md)
+
 ## State Must Represent Ground Truth
 
 State variables—both React `useState` and Reanimated shared values—should

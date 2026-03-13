@@ -116,7 +116,7 @@
 | skills/react-native-skills/rules/rendering-no-falsy-and.md | 已完成 | |
 | skills/react-native-skills/rules/rendering-text-in-text-component.md | 待處理 | |
 | skills/react-native-skills/rules/scroll-position-no-state.md | 已完成 | |
-| skills/react-native-skills/rules/state-ground-truth.md | 待處理 | |
+| skills/react-native-skills/rules/state-ground-truth.md | 已完成 | |
 | skills/react-native-skills/rules/ui-expo-image.md | 待處理 | |
 | skills/react-native-skills/rules/ui-image-gallery.md | 待處理 | |
 | skills/react-native-skills/rules/ui-measure-views.md | 待處理 | |

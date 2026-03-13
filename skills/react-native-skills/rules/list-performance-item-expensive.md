@@ -5,6 +5,8 @@ impactDescription: reduces render time for visible items during scroll
 tags: lists, performance, virtualization, hooks
 ---
 
+[繁體中文版 (Traditional Chinese)](./list-performance-item-expensive_zh_TW.md)
+
 ## Keep List Items Lightweight
 
 List items should be as inexpensive as possible to render. Minimize hooks, avoid

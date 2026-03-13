@@ -1,36 +1,32 @@
 ---
-title: Define Generic Context Interfaces for Dependency Injection
+title: 為依賴注入定義通用的 Context 介面 (Define Generic Context Interfaces for Dependency Injection)
 impact: HIGH
-impactDescription: enables dependency-injectable state across use-cases
+impactDescription: 讓狀態可以在不同使用案例中進行依賴注入
 tags: composition, context, state, typescript, dependency-injection
 ---
 
-[繁體中文版 (Traditional Chinese)](./state-context-interface_zh_TW.md)
+[English Version](./state-context-interface.md)
 
-## Define Generic Context Interfaces for Dependency Injection
+## 為依賴注入定義通用的 Context 介面
 
-Define a **generic interface** for your component context with three parts:
-`state`, `actions`, and `meta`. This interface is a contract that any provider
-can implement—enabling the same UI components to work with completely different
-state implementations.
+為你的元件 Context 定義一個**通用介面（generic interface）**，包含三個部分：`state`、`actions` 和 `meta`。這個介面是一個契約，任何 Provider 都可以實作它——這使得相同的 UI 元件可以與完全不同的狀態實作協作。
 
-**Core principle:** Lift state, compose internals, make state
-dependency-injectable.
+**核心原則：** 提升狀態（Lift state）、組合內部結構（compose internals）、使狀態可進行依賴注入（dependency-injectable）。
 
-**Incorrect (UI coupled to specific state implementation):**
+**不正確（UI 與特定的狀態實作耦合）：**
 
 ```tsx
 function ComposerInput() {
-  // Tightly coupled to a specific hook
+  // 與特定的 hook 緊密耦合
   const { input, setInput } = useChannelComposerState()
   return <TextInput value={input} onChangeText={setInput} />
 }
 ```
 
-**Correct (generic interface enables dependency injection):**
+**正確（通用介面實現依賴注入）：**
 
 ```tsx
-// Define a GENERIC interface that any provider can implement
+// 定義一個任何 Provider 都可以實作的通用介面
 interface ComposerState {
   input: string
   attachments: Attachment[]
@@ -55,7 +51,7 @@ interface ComposerContextValue {
 const ComposerContext = createContext<ComposerContextValue | null>(null)
 ```
 
-**UI components consume the interface, not the implementation:**
+**UI 元件消費介面，而非實作：**
 
 ```tsx
 function ComposerInput() {
@@ -65,7 +61,7 @@ function ComposerInput() {
     meta,
   } = use(ComposerContext)
 
-  // This component works with ANY provider that implements the interface
+  // 此元件可與任何實作該介面的 Provider 協作
   return (
     <TextInput
       ref={meta.inputRef}
@@ -76,10 +72,10 @@ function ComposerInput() {
 }
 ```
 
-**Different providers implement the same interface:**
+**不同的 Provider 實作相同的介面：**
 
 ```tsx
-// Provider A: Local state for ephemeral forms
+// Provider A：用於臨時表單的本地狀態
 function ForwardMessageProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState(initialState)
   const inputRef = useRef(null)
@@ -98,7 +94,7 @@ function ForwardMessageProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-// Provider B: Global synced state for channels
+// Provider B：用於頻道的全域同步狀態
 function ChannelProvider({ channelId, children }: Props) {
   const { state, update, submit } = useGlobalChannel(channelId)
   const inputRef = useRef(null)
@@ -117,10 +113,10 @@ function ChannelProvider({ channelId, children }: Props) {
 }
 ```
 
-**The same composed UI works with both:**
+**相同的組合 UI 可與兩者協作：**
 
 ```tsx
-// Works with ForwardMessageProvider (local state)
+// 與 ForwardMessageProvider（本地狀態）協作
 <ForwardMessageProvider>
   <Composer.Frame>
     <Composer.Input />
@@ -128,7 +124,7 @@ function ChannelProvider({ channelId, children }: Props) {
   </Composer.Frame>
 </ForwardMessageProvider>
 
-// Works with ChannelProvider (global synced state)
+// 與 ChannelProvider（全域同步狀態）協作
 <ChannelProvider channelId="abc">
   <Composer.Frame>
     <Composer.Input />
@@ -137,18 +133,16 @@ function ChannelProvider({ channelId, children }: Props) {
 </ChannelProvider>
 ```
 
-**Custom UI outside the component can access state and actions:**
+**元件外部的自定義 UI 可以存取狀態和操作：**
 
-The provider boundary is what matters—not the visual nesting. Components that
-need shared state don't have to be inside the `Composer.Frame`. They just need
-to be within the provider.
+Provider 的邊界才是關鍵——而不是視覺上的嵌套。需要共享狀態的元件不需要位在 `Composer.Frame` 內部。它們只需要位於 Provider 內部即可。
 
 ```tsx
 function ForwardMessageDialog() {
   return (
     <ForwardMessageProvider>
       <Dialog>
-        {/* The composer UI */}
+        {/* Composer UI */}
         <Composer.Frame>
           <Composer.Input placeholder="Add a message, if you'd like." />
           <Composer.Footer>
@@ -157,10 +151,10 @@ function ForwardMessageDialog() {
           </Composer.Footer>
         </Composer.Frame>
 
-        {/* Custom UI OUTSIDE the composer, but INSIDE the provider */}
+        {/* 位於 Composer 外部，但在 Provider 內部的自定義 UI */}
         <MessagePreview />
 
-        {/* Actions at the bottom of the dialog */}
+        {/* 對話框底部的操作按鈕 */}
         <DialogActions>
           <CancelButton />
           <ForwardButton />
@@ -170,7 +164,7 @@ function ForwardMessageDialog() {
   )
 }
 
-// This button lives OUTSIDE Composer.Frame but can still submit based on its context!
+// 此按鈕位於 Composer.Frame 外部，但仍可根據其 Context 進行提交！
 function ForwardButton() {
   const {
     actions: { submit },
@@ -178,16 +172,13 @@ function ForwardButton() {
   return <Button onPress={submit}>Forward</Button>
 }
 
-// This preview lives OUTSIDE Composer.Frame but can read composer's state!
+// 此預覽位於 Composer.Frame 外部，但可以讀取 Composer 的狀態！
 function MessagePreview() {
   const { state } = use(ComposerContext)
   return <Preview message={state.input} attachments={state.attachments} />
 }
 ```
 
-The `ForwardButton` and `MessagePreview` are not visually inside the composer
-box, but they can still access its state and actions. This is the power of
-lifting state into providers.
+`ForwardButton` 和 `MessagePreview` 在視覺上並非位於 Composer 框內，但它們仍然可以存取其狀態和操作。這就是將狀態提升到 Provider 中的力量。
 
-The UI is reusable bits you compose together. The state is dependency-injected
-by the provider. Swap the provider, keep the UI.
+UI 是你組合在一起的可重用片段。狀態由 Provider 進行依賴注入。更換 Provider，保留 UI。

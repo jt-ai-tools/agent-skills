@@ -1,20 +1,17 @@
 ---
-title: Use Galeria for Image Galleries and Lightbox
+title: 使用 Galeria 製作圖片庫和燈箱 (Lightbox)
 impact: MEDIUM
-impactDescription:
-  native shared element transitions, pinch-to-zoom, pan-to-close
+impactDescription: 原生共享元素過渡、捏合縮放 (pinch-to-zoom)、平移關閉 (pan-to-close)
 tags: images, gallery, lightbox, expo-image, ui
 ---
 
-[繁體中文版 (Traditional Chinese)](./ui-image-gallery_zh_TW.md)
+[English Version](./ui-image-gallery.md)
 
-## Use Galeria for Image Galleries and Lightbox
+## 使用 Galeria 製作圖片庫和燈箱 (Lightbox)
 
-For image galleries with lightbox (tap to fullscreen), use `@nandorojo/galeria`.
-It provides native shared element transitions with pinch-to-zoom, double-tap
-zoom, and pan-to-close. Works with any image component including `expo-image`.
+對於需要燈箱效果（點擊全屏顯示）的圖片庫，請使用 `@nandorojo/galeria`。它提供原生的共享元素過渡 (shared element transitions)，並支持捏合縮放 (pinch-to-zoom)、雙擊縮放以及平移關閉。它可以與任何圖片組件（包括 `expo-image`）配合使用。
 
-**Incorrect (custom modal implementation):**
+**錯誤示範 (自定義 Modal 實現)：**
 
 ```tsx
 function ImageGallery({ urls }: { urls: string[] }) {
@@ -35,7 +32,7 @@ function ImageGallery({ urls }: { urls: string[] }) {
 }
 ```
 
-**Correct (Galeria with expo-image):**
+**正確示範 (Galeria 配合 expo-image)：**
 
 ```tsx
 import { Galeria } from '@nandorojo/galeria'
@@ -54,7 +51,7 @@ function ImageGallery({ urls }: { urls: string[] }) {
 }
 ```
 
-**Single image:**
+**單張圖片：**
 
 ```tsx
 import { Galeria } from '@nandorojo/galeria'
@@ -71,7 +68,7 @@ function Avatar({ url }: { url: string }) {
 }
 ```
 
-**With low-res thumbnails and high-res fullscreen:**
+**低解析度縮略圖配合高解析度全屏圖：**
 
 ```tsx
 <Galeria urls={highResUrls}>
@@ -83,7 +80,7 @@ function Avatar({ url }: { url: string }) {
 </Galeria>
 ```
 
-**With FlashList:**
+**配合 FlashList 使用：**
 
 ```tsx
 <Galeria urls={urls}>
@@ -100,7 +97,6 @@ function Avatar({ url }: { url: string }) {
 </Galeria>
 ```
 
-Works with `expo-image`, `SolitoImage`, `react-native` Image, or any image
-component.
+適用於 `expo-image`、`SolitoImage`、`react-native` 原生 Image 或任何圖片組件。
 
-Reference: [Galeria](https://github.com/nandorojo/galeria)
+參考資料：[Galeria](https://github.com/nandorojo/galeria)

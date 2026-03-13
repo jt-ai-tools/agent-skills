@@ -1,17 +1,17 @@
 ---
-title: Preload Based on User Intent
+title: 根據使用者意圖進行預載
 impact: MEDIUM
-impactDescription: reduces perceived latency
+impactDescription: 降低感知延遲
 tags: bundle, preload, user-intent, hover
 ---
 
-[繁體中文版 (Traditional Chinese)](./bundle-preload_zh_TW.md)
+[English Version](./bundle-preload.md)
 
-## Preload Based on User Intent
+## 根據使用者意圖進行預載
 
-Preload heavy bundles before they're needed to reduce perceived latency.
+在需要之前預載大型打包檔案，以降低感知延遲。
 
-**Example (preload on hover/focus):**
+**範例（在懸停/聚焦時預載）：**
 
 ```tsx
 function EditorButton({ onClick }: { onClick: () => void }) {
@@ -33,7 +33,7 @@ function EditorButton({ onClick }: { onClick: () => void }) {
 }
 ```
 
-**Example (preload when feature flag is enabled):**
+**範例（在功能切換啟用時預載）：**
 
 ```tsx
 function FlagsProvider({ children, flags }: Props) {
@@ -49,4 +49,4 @@ function FlagsProvider({ children, flags }: Props) {
 }
 ```
 
-The `typeof window !== 'undefined'` check prevents bundling preloaded modules for SSR, optimizing server bundle size and build speed.
+`typeof window !== 'undefined'` 檢查可防止為 SSR 打包預載模組，從而優化伺服器打包大小和建置速度。

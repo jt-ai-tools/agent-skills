@@ -14,6 +14,8 @@ metadata:
 
 # React Composition Patterns
 
+[繁體中文版 (Traditional Chinese)](./SKILL_zh_TW.md)
+
 Composition patterns for building flexible, maintainable React components. Avoid
 boolean prop proliferation by using compound components, lifting state, and
 composing internals. These patterns make codebases easier for both humans and AI

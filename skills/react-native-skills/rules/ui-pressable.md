@@ -5,6 +5,8 @@ impactDescription: modern API, more flexible
 tags: ui, pressable, touchable, gestures
 ---
 
+[繁體中文版 (Traditional Chinese)](./ui-pressable_zh_TW.md)
+
 ## Use Pressable Instead of Touchable Components
 
 Never use `TouchableOpacity` or `TouchableHighlight`. Use `Pressable` from

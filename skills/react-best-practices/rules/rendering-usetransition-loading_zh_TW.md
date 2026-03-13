@@ -1,17 +1,17 @@
 ---
-title: Use useTransition Over Manual Loading States
+title: 使用 useTransition 取代手動載入狀態
 impact: LOW
-impactDescription: reduces re-renders and improves code clarity
+impactDescription: 減少重複渲染並提升程式碼清晰度
 tags: rendering, transitions, useTransition, loading, state
 ---
 
-[繁體中文版 (Traditional Chinese)](./rendering-usetransition-loading_zh_TW.md)
+[English Version](./rendering-usetransition-loading.md)
 
-## Use useTransition Over Manual Loading States
+## 使用 useTransition 取代手動載入狀態
 
-Use `useTransition` instead of manual `useState` for loading states. This provides built-in `isPending` state and automatically manages transitions.
+使用 `useTransition` 而不是手動使用 `useState` 來處理載入狀態。這提供了內建的 `isPending` 狀態並自動管理轉換。
 
-**Incorrect (manual loading state):**
+**不正確（手動載入狀態）：**
 
 ```tsx
 function SearchResults() {
@@ -37,7 +37,7 @@ function SearchResults() {
 }
 ```
 
-**Correct (useTransition with built-in pending state):**
+**正確（使用具備內建 pending 狀態的 useTransition）：**
 
 ```tsx
 import { useTransition, useState } from 'react'
@@ -48,10 +48,10 @@ function SearchResults() {
   const [isPending, startTransition] = useTransition()
 
   const handleSearch = (value: string) => {
-    setQuery(value) // Update input immediately
+    setQuery(value) // 立即更新輸入
     
     startTransition(async () => {
-      // Fetch and update results
+      // 獲取並更新結果
       const data = await fetchResults(value)
       setResults(data)
     })
@@ -67,11 +67,11 @@ function SearchResults() {
 }
 ```
 
-**Benefits:**
+**優點：**
 
-- **Automatic pending state**: No need to manually manage `setIsLoading(true/false)`
-- **Error resilience**: Pending state correctly resets even if the transition throws
-- **Better responsiveness**: Keeps the UI responsive during updates
-- **Interrupt handling**: New transitions automatically cancel pending ones
+- **自動 pending 狀態**：無需手動管理 `setIsLoading(true/false)`
+- **錯誤恢復能力**：即使轉換過程拋出錯誤，pending 狀態也會正確重置
+- **更好的回應性**：在更新期間保持 UI 的回應性
+- **中斷處理**：新的轉換會自動取消掛起中的轉換
 
-Reference: [useTransition](https://react.dev/reference/react/useTransition)
+參考資料：[useTransition](https://react.dev/reference/react/useTransition)

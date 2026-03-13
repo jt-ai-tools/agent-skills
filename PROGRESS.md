@@ -17,7 +17,7 @@
 | skills/composition-patterns/rules/state-context-interface.md | 已完成 | |
 | skills/composition-patterns/rules/state-decouple-implementation.md | 已完成 | |
 | skills/composition-patterns/rules/state-lift-state.md | 已完成 | |
-| skills/deploy-to-vercel/SKILL.md | 待處理 | |
+| skills/deploy-to-vercel/SKILL.md | 已完成 | |
 | skills/react-best-practices/AGENTS.md | 待處理 | |
 | skills/react-best-practices/README.md | 待處理 | |
 | skills/react-best-practices/SKILL.md | 待處理 | |

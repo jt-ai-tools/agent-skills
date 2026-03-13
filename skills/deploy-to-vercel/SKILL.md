@@ -8,6 +8,8 @@ metadata:
 
 # Deploy to Vercel
 
+[繁體中文版 (Traditional Chinese)](./SKILL_zh_TW.md)
+
 Deploy any project to Vercel. **Always deploy as preview** (not production) unless the user explicitly asks for production.
 
 The goal is to get the user into the best long-term setup: their project linked to Vercel with git-push deploys. Every method below tries to move the user closer to that state.

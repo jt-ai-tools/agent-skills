@@ -5,6 +5,8 @@ impactDescription: consistent design, smoother borders, cleaner layouts
 tags: styling, css, layout, shadows, gradients
 ---
 
+[繁體中文版 (Traditional Chinese)](./ui-styling_zh_TW.md)
+
 ## Modern React Native Styling Patterns
 
 Follow these styling patterns for cleaner, more consistent React Native code.

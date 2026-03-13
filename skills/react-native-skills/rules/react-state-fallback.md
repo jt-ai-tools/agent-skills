@@ -5,6 +5,8 @@ impactDescription: reactive fallbacks without syncing
 tags: state, hooks, derived-state, props, initialState
 ---
 
+[繁體中文版 (Traditional Chinese)](./react-state-fallback_zh_TW.md)
+
 ## Use fallback state instead of initialState
 
 Use `undefined` as initial state and nullish coalescing (`??`) to fall back to

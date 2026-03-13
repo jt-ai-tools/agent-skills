@@ -65,7 +65,7 @@
 | skills/react-best-practices/rules/rendering-svg-precision.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-usetransition-loading.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-defer-reads.md | 已完成 | |
-| skills/react-best-practices/rules/rerender-dependencies.md | 待處理 | |
+| skills/react-best-practices/rules/rerender-dependencies.md | 已完成 | |
 | skills/react-best-practices/rules/rerender-derived-state-no-effect.md | 待處理 | |
 | skills/react-best-practices/rules/rerender-derived-state.md | 待處理 | |
 | skills/react-best-practices/rules/rerender-functional-setstate.md | 待處理 | |

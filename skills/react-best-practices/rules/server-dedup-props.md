@@ -5,6 +5,8 @@ impactDescription: reduces network payload by avoiding duplicate serialization
 tags: server, rsc, serialization, props, client-components
 ---
 
+[繁體中文版 (Traditional Chinese)](./server-dedup-props_zh_TW.md)
+
 ## Avoid Duplicate Serialization in RSC Props
 
 **Impact: LOW (reduces network payload by avoiding duplicate serialization)**

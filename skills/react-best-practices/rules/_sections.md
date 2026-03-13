@@ -1,5 +1,7 @@
 # Sections
 
+[繁體中文版 (Traditional Chinese)](./_sections_zh_TW.md)
+
 This file defines all sections, their ordering, impact levels, and descriptions.
 The section ID (in parentheses) is the filename prefix used to group rules.
 

@@ -55,7 +55,7 @@
 | skills/react-best-practices/rules/js-tosorted-immutable.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-activity.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-animate-svg-wrapper.md | 已完成 | |
-| skills/react-best-practices/rules/rendering-conditional-render.md | 待處理 | |
+| skills/react-best-practices/rules/rendering-conditional-render.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-content-visibility.md | 待處理 | |
 | skills/react-best-practices/rules/rendering-hoist-jsx.md | 待處理 | |
 | skills/react-best-practices/rules/rendering-hydration-no-flicker.md | 待處理 | |

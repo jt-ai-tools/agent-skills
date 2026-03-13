@@ -15,7 +15,7 @@
 | skills/composition-patterns/rules/patterns-explicit-variants.md | 已完成 | |
 | skills/composition-patterns/rules/react19-no-forwardref.md | 已完成 | |
 | skills/composition-patterns/rules/state-context-interface.md | 已完成 | |
-| skills/composition-patterns/rules/state-decouple-implementation.md | 待處理 | |
+| skills/composition-patterns/rules/state-decouple-implementation.md | 已完成 | |
 | skills/composition-patterns/rules/state-lift-state.md | 待處理 | |
 | skills/deploy-to-vercel/SKILL.md | 待處理 | |
 | skills/react-best-practices/AGENTS.md | 待處理 | |

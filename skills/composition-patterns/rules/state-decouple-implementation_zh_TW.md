@@ -1,23 +1,21 @@
 ---
-title: Decouple State Management from UI
+title: 將狀態管理與 UI 解耦 (Decouple State Management from UI)
 impact: MEDIUM
-impactDescription: enables swapping state implementations without changing UI
+impactDescription: 可以在不更改 UI 的情況下更換狀態實作
 tags: composition, state, architecture
 ---
 
-[繁體中文版 (Traditional Chinese)](./state-decouple-implementation_zh_TW.md)
+[English Version](./state-decouple-implementation.md)
 
-## Decouple State Management from UI
+## 將狀態管理與 UI 解耦
 
-The provider component should be the only place that knows how state is managed.
-UI components consume the context interface—they don't know if state comes from
-useState, Zustand, or a server sync.
+Provider 元件應該是唯一知道狀態如何管理的地方。UI 元件消費 Context 介面——它們不知道狀態是來自 `useState`、Zustand 還是伺服器同步。
 
-**Incorrect (UI coupled to state implementation):**
+**不正確（UI 與狀態實作耦合）：**
 
 ```tsx
 function ChannelComposer({ channelId }: { channelId: string }) {
-  // UI component knows about global state implementation
+  // UI 元件知道全域狀態的實作方式
   const state = useGlobalChannelState(channelId)
   const { submit, updateInput } = useChannelSync(channelId)
 
@@ -33,10 +31,10 @@ function ChannelComposer({ channelId }: { channelId: string }) {
 }
 ```
 
-**Correct (state management isolated in provider):**
+**正確（狀態管理被隔離在 Provider 中）：**
 
 ```tsx
-// Provider handles all state management details
+// Provider 處理所有狀態管理的細節
 function ChannelProvider({
   channelId,
   children,
@@ -58,7 +56,7 @@ function ChannelProvider({
   )
 }
 
-// UI component only knows about the context interface
+// UI 元件只知道 Context 介面
 function ChannelComposer() {
   return (
     <Composer.Frame>
@@ -71,7 +69,7 @@ function ChannelComposer() {
   )
 }
 
-// Usage
+// 使用方式
 function Channel({ channelId }: { channelId: string }) {
   return (
     <ChannelProvider channelId={channelId}>
@@ -81,10 +79,10 @@ function Channel({ channelId }: { channelId: string }) {
 }
 ```
 
-**Different providers, same UI:**
+**不同的 Provider，相同的 UI：**
 
 ```tsx
-// Local state for ephemeral forms
+// 用於臨時表單的本地狀態
 function ForwardMessageProvider({ children }) {
   const [state, setState] = useState(initialState)
   const forwardMessage = useForwardMessage()
@@ -99,7 +97,7 @@ function ForwardMessageProvider({ children }) {
   )
 }
 
-// Global synced state for channels
+// 用於頻道的全域同步狀態
 function ChannelProvider({ channelId, children }) {
   const { state, update, submit } = useGlobalChannel(channelId)
 
@@ -111,5 +109,4 @@ function ChannelProvider({ channelId, children }) {
 }
 ```
 
-The same `Composer.Input` component works with both providers because it only
-depends on the context interface, not the implementation.
+同一個 `Composer.Input` 元件可以與這兩個 Provider 協作，因為它只依賴於 Context 介面，而非具體實作。

@@ -5,6 +5,8 @@ impactDescription: reduced memory, faster mounts
 tags: lists, performance, virtualization, scrollview
 ---
 
+[繁體中文版 (Traditional Chinese)](./list-performance-virtualize_zh_TW.md)
+
 ## Use a List Virtualizer for Any List
 
 Use a list virtualizer like LegendList or FlashList instead of ScrollView with

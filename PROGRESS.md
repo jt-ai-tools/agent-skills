@@ -112,7 +112,7 @@
 | skills/react-native-skills/rules/react-compiler-reanimated-shared-values.md | 已完成 | |
 | skills/react-native-skills/rules/react-state-dispatcher.md | 已完成 | |
 | skills/react-native-skills/rules/react-state-fallback.md | 已完成 | |
-| skills/react-native-skills/rules/react-state-minimize.md | 待處理 | |
+| skills/react-native-skills/rules/react-state-minimize.md | 已完成 | |
 | skills/react-native-skills/rules/rendering-no-falsy-and.md | 待處理 | |
 | skills/react-native-skills/rules/rendering-text-in-text-component.md | 待處理 | |
 | skills/react-native-skills/rules/scroll-position-no-state.md | 待處理 | |

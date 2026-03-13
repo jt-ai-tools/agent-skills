@@ -79,7 +79,7 @@
 | skills/react-best-practices/rules/rerender-use-ref-transient-values.md | 已完成 | |
 | skills/react-best-practices/rules/server-after-nonblocking.md | 已完成 | |
 | skills/react-best-practices/rules/server-auth-actions.md | 已完成 | |
-| skills/react-best-practices/rules/server-cache-lru.md | 待處理 | |
+| skills/react-best-practices/rules/server-cache-lru.md | 已完成 | |
 | skills/react-best-practices/rules/server-cache-react.md | 待處理 | |
 | skills/react-best-practices/rules/server-dedup-props.md | 待處理 | |
 | skills/react-best-practices/rules/server-hoist-static-io.md | 待處理 | |

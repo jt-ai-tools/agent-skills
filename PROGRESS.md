@@ -97,7 +97,7 @@
 | skills/react-native-skills/rules/fonts-config-plugin.md | 已完成 | |
 | skills/react-native-skills/rules/imports-design-system-folder.md | 已完成 | |
 | skills/react-native-skills/rules/js-hoist-intl.md | 已完成 | |
-| skills/react-native-skills/rules/list-performance-callbacks.md | 待處理 | |
+| skills/react-native-skills/rules/list-performance-callbacks.md | 已完成 | |
 | skills/react-native-skills/rules/list-performance-function-references.md | 待處理 | |
 | skills/react-native-skills/rules/list-performance-images.md | 待處理 | |
 | skills/react-native-skills/rules/list-performance-inline-objects.md | 待處理 | |

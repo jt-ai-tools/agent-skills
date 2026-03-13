@@ -5,6 +5,8 @@ impactDescription: Fewer re-renders and faster lists
 tags: tag1, tag2
 ---
 
+[繁體中文版 (Traditional Chinese)](./list-performance-callbacks_zh_TW.md)
+
 ## List performance callbacks
 
 **Impact: HIGH (Fewer re-renders and faster lists)**

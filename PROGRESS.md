@@ -62,7 +62,7 @@
 | skills/react-best-practices/rules/rendering-hydration-suppress-warning.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-resource-hints.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-script-defer-async.md | 已完成 | |
-| skills/react-best-practices/rules/rendering-svg-precision.md | 待處理 | |
+| skills/react-best-practices/rules/rendering-svg-precision.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-usetransition-loading.md | 待處理 | |
 | skills/react-best-practices/rules/rerender-defer-reads.md | 待處理 | |
 | skills/react-best-practices/rules/rerender-dependencies.md | 待處理 | |

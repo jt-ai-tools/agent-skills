@@ -5,6 +5,8 @@ impactDescription: required for autolinking to work
 tags: monorepo, native, autolinking, installation
 ---
 
+[繁體中文版 (Traditional Chinese)](./monorepo-native-deps-in-app_zh_TW.md)
+
 ## Install Native Dependencies in App Directory
 
 In a monorepo, packages with native code must be installed in the native app's

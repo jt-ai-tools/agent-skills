@@ -105,7 +105,7 @@
 | skills/react-native-skills/rules/list-performance-item-memo.md | 已完成 | |
 | skills/react-native-skills/rules/list-performance-item-types.md | 已完成 | |
 | skills/react-native-skills/rules/list-performance-virtualize.md | 已完成 | |
-| skills/react-native-skills/rules/monorepo-native-deps-in-app.md | 待處理 | |
+| skills/react-native-skills/rules/monorepo-native-deps-in-app.md | 已完成 | |
 | skills/react-native-skills/rules/monorepo-single-dependency-versions.md | 待處理 | |
 | skills/react-native-skills/rules/navigation-native-navigators.md | 待處理 | |
 | skills/react-native-skills/rules/react-compiler-destructure-functions.md | 待處理 | |

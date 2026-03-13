@@ -5,6 +5,8 @@ impactDescription: cleaner component definitions and context usage
 tags: react19, refs, context, hooks
 ---
 
+[繁體中文版 (Traditional Chinese)](./react19-no-forwardref_zh_TW.md)
+
 ## React 19 API Changes
 
 > **⚠️ React 19+ only.** Skip this if you're on React 18 or earlier.

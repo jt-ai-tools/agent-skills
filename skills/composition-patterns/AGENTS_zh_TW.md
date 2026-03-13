@@ -1,60 +1,52 @@
-[繁體中文版 (Traditional Chinese)](./AGENTS_zh_TW.md)
+# React 組合模式 (React Composition Patterns)
 
-# React Composition Patterns
+[English Version](./AGENTS.md)
 
-**Version 1.0.0**  
-Engineering  
-January 2026
+**版本 1.0.0**  
+工程團隊  
+2026 年 1 月
 
-> **Note:**  
-> This document is mainly for agents and LLMs to follow when maintaining,  
-> generating, or refactoring React codebases using composition. Humans  
-> may also find it useful, but guidance here is optimized for automation  
-> and consistency by AI-assisted workflows.
+> **注意：**  
+> 本文件主要供代理人與 LLM 在使用組合模式維護、產生或重構 React 程式碼庫時遵循。人類也可能會發現其有用之處，但此處的指引針對 AI 輔助工作流程的自動化與一致性進行了優化。
 
 ---
 
-## Abstract
+## 摘要 (Abstract)
 
-Composition patterns for building flexible, maintainable React components. Avoid boolean prop proliferation by using compound components, lifting state, and composing internals. These patterns make codebases easier for both humans and AI agents to work with as they scale.
-
----
-
-## Table of Contents
-
-1. [Component Architecture](#1-component-architecture) — **HIGH**
-   - 1.1 [Avoid Boolean Prop Proliferation](#11-avoid-boolean-prop-proliferation)
-   - 1.2 [Use Compound Components](#12-use-compound-components)
-2. [State Management](#2-state-management) — **MEDIUM**
-   - 2.1 [Decouple State Management from UI](#21-decouple-state-management-from-ui)
-   - 2.2 [Define Generic Context Interfaces for Dependency Injection](#22-define-generic-context-interfaces-for-dependency-injection)
-   - 2.3 [Lift State into Provider Components](#23-lift-state-into-provider-components)
-3. [Implementation Patterns](#3-implementation-patterns) — **MEDIUM**
-   - 3.1 [Create Explicit Component Variants](#31-create-explicit-component-variants)
-   - 3.2 [Prefer Composing Children Over Render Props](#32-prefer-composing-children-over-render-props)
-4. [React 19 APIs](#4-react-19-apis) — **MEDIUM**
-   - 4.1 [React 19 API Changes](#41-react-19-api-changes)
+用於建立具彈性、可維護的 React 元件的組合模式。透過使用複合元件、提升狀態以及組合內部結構，避免布林屬性 (boolean prop) 的激增。這些模式使得程式碼庫在擴展時，對人類與 AI 代理人而言都更容易處理。
 
 ---
 
-## 1. Component Architecture
+## 目錄
 
-**Impact: HIGH**
+1. [元件架構](#1-元件架構) — **高 (HIGH)**
+   - 1.1 [避免布林屬性激增](#11-避免布林屬性激增)
+   - 1.2 [使用複合元件](#12-使用複合元件)
+2. [狀態管理](#2-狀態管理) — **中 (MEDIUM)**
+   - 2.1 [將狀態管理與 UI 解耦](#21-將狀態管理與-ui-解耦)
+   - 2.2 [為相依注入定義通用的 Context 介面](#22-為相依注入定義通用的-context-介面)
+   - 2.3 [將狀態提升至 Provider 元件](#23-將狀態提升至-provider-元件)
+3. [實作模式](#3-實作模式) — **中 (MEDIUM)**
+   - 3.1 [建立明確的元件變體](#31-建立明確的元件變體)
+   - 3.2 [偏好組合 Children 而非 Render Props](#32-偏好組合-children-而非-render-props)
+4. [React 19 API](#4-react-19-api) — **中 (MEDIUM)**
+   - 4.1 [React 19 API 變更](#41-react-19-api-變更)
 
-Fundamental patterns for structuring components to avoid prop
-proliferation and enable flexible composition.
+---
 
-### 1.1 Avoid Boolean Prop Proliferation
+## 1. 元件架構
 
-**Impact: CRITICAL (prevents unmaintainable component variants)**
+**影響程度：高 (HIGH)**
 
-Don't add boolean props like `isThread`, `isEditing`, `isDMThread` to customize
+用於結構化元件的基本模式，以避免屬性激增並實現彈性的組合。
 
-component behavior. Each boolean doubles possible states and creates
+### 1.1 避免布林屬性激增
 
-unmaintainable conditional logic. Use composition instead.
+**影響程度：關鍵 (CRITICAL)（防止產生難以維護的元件變體）**
 
-**Incorrect: boolean props create exponential complexity**
+不要添加像 `isThread`、`isEditing`、`isDMThread` 這樣的布林屬性來客製化元件行為。每個布林值都會使可能的狀態增加一倍，並產生難以維護的條件邏輯。請改用組合模式。
+
+**錯誤：布林屬性產生指數級的複雜度**
 
 ```tsx
 function Composer({
@@ -88,10 +80,10 @@ function Composer({
 }
 ```
 
-**Correct: composition eliminates conditionals**
+**正確：組合模式消除條件句**
 
 ```tsx
-// Channel composer
+// 頻道編輯器 (Channel composer)
 function ChannelComposer() {
   return (
     <Composer.Frame>
@@ -107,7 +99,7 @@ function ChannelComposer() {
   )
 }
 
-// Thread composer - adds "also send to channel" field
+// 討論串編輯器 (Thread composer) - 新增「同時傳送到頻道」欄位
 function ThreadComposer({ channelId }: { channelId: string }) {
   return (
     <Composer.Frame>
@@ -123,7 +115,7 @@ function ThreadComposer({ channelId }: { channelId: string }) {
   )
 }
 
-// Edit composer - different footer actions
+// 編輯模式編輯器 (Edit composer) - 不同的頁尾動作
 function EditComposer() {
   return (
     <Composer.Frame>
@@ -139,21 +131,15 @@ function EditComposer() {
 }
 ```
 
-Each variant is explicit about what it renders. We can share internals without
+每個變體都明確表示其渲染的內容。我們可以共享內部元件，而無需共享單一的龐大父元件。
 
-sharing a single monolithic parent.
+### 1.2 使用複合元件 (Compound Components)
 
-### 1.2 Use Compound Components
+**影響程度：高 (HIGH)（實現彈性的組合，無需屬性鑽取）**
 
-**Impact: HIGH (enables flexible composition without prop drilling)**
+將複雜元件結構化為具有共享 Context 的複合元件。每個子元件透過 Context 而非 Props 存取共享狀態。使用者可以組合其所需的片段。
 
-Structure complex components as compound components with a shared context. Each
-
-subcomponent accesses shared state via context, not props. Consumers compose the
-
-pieces they need.
-
-**Incorrect: monolithic component with render props**
+**錯誤：帶有 render props 的單一龐大元件**
 
 ```tsx
 function Composer({
@@ -183,7 +169,7 @@ function Composer({
 }
 ```
 
-**Correct: compound components with shared context**
+**正確：具共享 Context 的複合元件**
 
 ```tsx
 const ComposerContext = createContext<ComposerContextValue | null>(null)
@@ -219,10 +205,10 @@ function ComposerSubmit() {
   const {
     actions: { submit },
   } = use(ComposerContext)
-  return <Button onPress={submit}>Send</Button>
+  return <Button onPress={submit}>傳送</Button>
 }
 
-// Export as compound component
+// 作為複合元件導出
 const Composer = {
   Provider: ComposerProvider,
   Frame: ComposerFrame,
@@ -236,7 +222,7 @@ const Composer = {
 }
 ```
 
-**Usage:**
+**用法：**
 
 ```tsx
 <Composer.Provider state={state} actions={actions} meta={meta}>
@@ -251,32 +237,27 @@ const Composer = {
 </Composer.Provider>
 ```
 
-Consumers explicitly compose exactly what they need. No hidden conditionals. And the state, actions and meta are dependency-injected by a parent provider, allowing multiple usages of the same component structure.
+使用者明確組合其所需的內容，沒有隱藏的條件句。且狀態、動作 (actions) 與中繼資料 (meta) 由父 Provider 透過相依注入提供，允許在相同的元件結構下有多種用途。
 
 ---
 
-## 2. State Management
+## 2. 狀態管理
 
-**Impact: MEDIUM**
+**影響程度：中 (MEDIUM)**
 
-Patterns for lifting state and managing shared context across
-composed components.
+用於在組合元件中提升狀態與管理共享 Context 的模式。
 
-### 2.1 Decouple State Management from UI
+### 2.1 將狀態管理與 UI 解耦
 
-**Impact: MEDIUM (enables swapping state implementations without changing UI)**
+**影響程度：中 (MEDIUM)（允許在不更改 UI 的情況下更換狀態實作）**
 
-The provider component should be the only place that knows how state is managed.
+Provider 元件應是唯一知道如何管理狀態的地方。UI 元件使用 Context 介面 —— 它們不需要知道狀態是來自 `useState`、Zustand 還是伺服器同步。
 
-UI components consume the context interface—they don't know if state comes from
-
-useState, Zustand, or a server sync.
-
-**Incorrect: UI coupled to state implementation**
+**錯誤：UI 與狀態實作耦合**
 
 ```tsx
 function ChannelComposer({ channelId }: { channelId: string }) {
-  // UI component knows about global state implementation
+  // UI 元件知道全域狀態的實作方式
   const state = useGlobalChannelState(channelId)
   const { submit, updateInput } = useChannelSync(channelId)
 
@@ -292,10 +273,10 @@ function ChannelComposer({ channelId }: { channelId: string }) {
 }
 ```
 
-**Correct: state management isolated in provider**
+**正確：狀態管理在 Provider 中隔離**
 
 ```tsx
-// Provider handles all state management details
+// Provider 處理所有狀態管理的細節
 function ChannelProvider({
   channelId,
   children,
@@ -317,7 +298,7 @@ function ChannelProvider({
   )
 }
 
-// UI component only knows about the context interface
+// UI 元件僅知道 Context 介面
 function ChannelComposer() {
   return (
     <Composer.Frame>
@@ -330,7 +311,7 @@ function ChannelComposer() {
   )
 }
 
-// Usage
+// 用法
 function Channel({ channelId }: { channelId: string }) {
   return (
     <ChannelProvider channelId={channelId}>
@@ -340,10 +321,10 @@ function Channel({ channelId }: { channelId: string }) {
 }
 ```
 
-**Different providers, same UI:**
+**不同的 Provider，相同的 UI：**
 
 ```tsx
-// Local state for ephemeral forms
+// 用於暫存表單的區域狀態
 function ForwardMessageProvider({ children }) {
   const [state, setState] = useState(initialState)
   const forwardMessage = useForwardMessage()
@@ -358,7 +339,7 @@ function ForwardMessageProvider({ children }) {
   )
 }
 
-// Global synced state for channels
+// 用於頻道的全域同步狀態
 function ChannelProvider({ channelId, children }) {
   const { state, update, submit } = useGlobalChannel(channelId)
 
@@ -370,40 +351,30 @@ function ChannelProvider({ channelId, children }) {
 }
 ```
 
-The same `Composer.Input` component works with both providers because it only
+同一個 `Composer.Input` 元件可以與這兩種 Provider 配合使用，因為它僅依賴於 Context 介面，而非其實作方式。
 
-depends on the context interface, not the implementation.
+### 2.2 為相依注入定義通用的 Context 介面
 
-### 2.2 Define Generic Context Interfaces for Dependency Injection
+**影響程度：高 (HIGH)（實現跨使用情境的可注入狀態）**
 
-**Impact: HIGH (enables dependency-injectable state across use-cases)**
+為您的元件 Context 定義一個**通用介面 (generic interface)**，包含三個部分：`state`、`actions` 與 `meta`。此介面是任何 Provider 都可以實作的契約 —— 使得相同的 UI 元件能夠與完全不同的狀態實作配合使用。
 
-Define a **generic interface** for your component context with three parts:
+**核心原則：**提升狀態，組合內部結構，使狀態可被相依注入。
 
-`state`, `actions`, and `meta`. This interface is a contract that any provider
-
-can implement—enabling the same UI components to work with completely different
-
-state implementations.
-
-**Core principle:** Lift state, compose internals, make state
-
-dependency-injectable.
-
-**Incorrect: UI coupled to specific state implementation**
+**錯誤：UI 與特定的狀態實作耦合**
 
 ```tsx
 function ComposerInput() {
-  // Tightly coupled to a specific hook
+  // 緊密耦合到特定的 hook
   const { input, setInput } = useChannelComposerState()
   return <TextInput value={input} onChangeText={setInput} />
 }
 ```
 
-**Correct: generic interface enables dependency injection**
+**正確：通用介面實現相依注入**
 
 ```tsx
-// Define a GENERIC interface that any provider can implement
+// 定義任何 Provider 都可以實作的通用 (GENERIC) 介面
 interface ComposerState {
   input: string
   attachments: Attachment[]
@@ -428,7 +399,7 @@ interface ComposerContextValue {
 const ComposerContext = createContext<ComposerContextValue | null>(null)
 ```
 
-**UI components consume the interface, not the implementation:**
+**UI 元件使用介面，而非實作：**
 
 ```tsx
 function ComposerInput() {
@@ -438,7 +409,7 @@ function ComposerInput() {
     meta,
   } = use(ComposerContext)
 
-  // This component works with ANY provider that implements the interface
+  // 此元件可與任何實作該介面的 Provider 配合使用
   return (
     <TextInput
       ref={meta.inputRef}
@@ -449,10 +420,10 @@ function ComposerInput() {
 }
 ```
 
-**Different providers implement the same interface:**
+**不同的 Provider 實作相同的介面：**
 
 ```tsx
-// Provider A: Local state for ephemeral forms
+// Provider A: 用於暫存表單的區域狀態
 function ForwardMessageProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState(initialState)
   const inputRef = useRef(null)
@@ -471,7 +442,7 @@ function ForwardMessageProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-// Provider B: Global synced state for channels
+// Provider B: 用於頻道的全域同步狀態
 function ChannelProvider({ channelId, children }: Props) {
   const { state, update, submit } = useGlobalChannel(channelId)
   const inputRef = useRef(null)
@@ -490,10 +461,10 @@ function ChannelProvider({ channelId, children }: Props) {
 }
 ```
 
-**The same composed UI works with both:**
+**相同的組合 UI 可與兩者配合使用：**
 
 ```tsx
-// Works with ForwardMessageProvider (local state)
+// 與 ForwardMessageProvider (區域狀態) 配合使用
 <ForwardMessageProvider>
   <Composer.Frame>
     <Composer.Input />
@@ -501,7 +472,7 @@ function ChannelProvider({ channelId, children }: Props) {
   </Composer.Frame>
 </ForwardMessageProvider>
 
-// Works with ChannelProvider (global synced state)
+// 與 ChannelProvider (全域同步狀態) 配合使用
 <ChannelProvider channelId="abc">
   <Composer.Frame>
     <Composer.Input />
@@ -510,26 +481,26 @@ function ChannelProvider({ channelId, children }: Props) {
 </ChannelProvider>
 ```
 
-**Custom UI outside the component can access state and actions:**
+**元件之外的自定義 UI 也可以存取狀態與動作：**
 
 ```tsx
 function ForwardMessageDialog() {
   return (
     <ForwardMessageProvider>
       <Dialog>
-        {/* The composer UI */}
+        {/* 編輯器 UI */}
         <Composer.Frame>
-          <Composer.Input placeholder="Add a message, if you'd like." />
+          <Composer.Input placeholder="若有需要，請新增訊息。" />
           <Composer.Footer>
             <Composer.Formatting />
             <Composer.Emojis />
           </Composer.Footer>
         </Composer.Frame>
 
-        {/* Custom UI OUTSIDE the composer, but INSIDE the provider */}
+        {/* 位於編輯器框框之外，但在 Provider 之內的自定義 UI */}
         <MessagePreview />
 
-        {/* Actions at the bottom of the dialog */}
+        {/* 對話框底部的動作 */}
         <DialogActions>
           <CancelButton />
           <ForwardButton />
@@ -539,48 +510,34 @@ function ForwardMessageDialog() {
   )
 }
 
-// This button lives OUTSIDE Composer.Frame but can still submit based on its context!
+// 此按鈕位於 Composer.Frame 之外，但仍可根據其 Context 進行提交！
 function ForwardButton() {
   const {
     actions: { submit },
   } = use(ComposerContext)
-  return <Button onPress={submit}>Forward</Button>
+  return <Button onPress={submit}>轉傳</Button>
 }
 
-// This preview lives OUTSIDE Composer.Frame but can read composer's state!
+// 此預覽位於 Composer.Frame 之外，但可以讀取編輯器的狀態！
 function MessagePreview() {
   const { state } = use(ComposerContext)
   return <Preview message={state.input} attachments={state.attachments} />
 }
 ```
 
-The provider boundary is what matters—not the visual nesting. Components that
+Provider 的邊界才是重點 —— 而非視覺上的嵌套。需要共享狀態的元件不一定要在 `Composer.Frame` 裡面，它們只需要在 Provider 裡面即可。
 
-need shared state don't have to be inside the `Composer.Frame`. They just need
+`ForwardButton` 與 `MessagePreview` 在視覺上並不在編輯器框框內，但它們仍可存取其狀態與動作。這就是將狀態提升至 Provider 的力量。
 
-to be within the provider.
+UI 是您組合在一起的可重複使用片段。狀態由 Provider 相依注入。更換 Provider，保留 UI。
 
-The `ForwardButton` and `MessagePreview` are not visually inside the composer
+### 2.3 將狀態提升至 Provider 元件
 
-box, but they can still access its state and actions. This is the power of
+**影響程度：高 (HIGH)（實現元件邊界外的狀態共享）**
 
-lifting state into providers.
+將狀態管理移至專用的 Provider 元件中。這允許主 UI 之外的同層元件存取並修改狀態，而無需屬性鑽取或彆扭的 Ref。
 
-The UI is reusable bits you compose together. The state is dependency-injected
-
-by the provider. Swap the provider, keep the UI.
-
-### 2.3 Lift State into Provider Components
-
-**Impact: HIGH (enables state sharing outside component boundaries)**
-
-Move state management into dedicated provider components. This allows sibling
-
-components outside the main UI to access and modify state without prop drilling
-
-or awkward refs.
-
-**Incorrect: state trapped inside component**
+**錯誤：狀態困在元件內部**
 
 ```tsx
 function ForwardMessageComposer() {
@@ -595,22 +552,22 @@ function ForwardMessageComposer() {
   )
 }
 
-// Problem: How does this button access composer state?
+// 問題：此按鈕如何存取編輯器的狀態？
 function ForwardMessageDialog() {
   return (
     <Dialog>
       <ForwardMessageComposer />
-      <MessagePreview /> {/* Needs composer state */}
+      <MessagePreview /> {/* 需要編輯器狀態 */}
       <DialogActions>
         <CancelButton />
-        <ForwardButton /> {/* Needs to call submit */}
+        <ForwardButton /> {/* 需要呼叫提交 (submit) */}
       </DialogActions>
     </Dialog>
   )
 }
 ```
 
-**Incorrect: useEffect to sync state up**
+**錯誤：使用 useEffect 同步狀態**
 
 ```tsx
 function ForwardMessageDialog() {
@@ -626,12 +583,12 @@ function ForwardMessageDialog() {
 function ForwardMessageComposer({ onInputChange }) {
   const [state, setState] = useState(initialState)
   useEffect(() => {
-    onInputChange(state.input) // Sync on every change 😬
+    onInputChange(state.input) // 每次變更都同步 😬
   }, [state.input])
 }
 ```
 
-**Incorrect: reading state from ref on submit**
+**錯誤：在提交時從 Ref 讀取狀態**
 
 ```tsx
 function ForwardMessageDialog() {
@@ -645,7 +602,7 @@ function ForwardMessageDialog() {
 }
 ```
 
-**Correct: state lifted to provider**
+**正確：狀態提升至 Provider**
 
 ```tsx
 function ForwardMessageProvider({ children }: { children: React.ReactNode }) {
@@ -669,10 +626,10 @@ function ForwardMessageDialog() {
     <ForwardMessageProvider>
       <Dialog>
         <ForwardMessageComposer />
-        <MessagePreview /> {/* Custom components can access state and actions */}
+        <MessagePreview /> {/* 自定義元件可以存取狀態與動作 */}
         <DialogActions>
           <CancelButton />
-          <ForwardButton /> {/* Custom components can access state and actions */}
+          <ForwardButton /> {/* 自定義元件可以存取狀態與動作 */}
         </DialogActions>
       </Dialog>
     </ForwardMessageProvider>
@@ -681,45 +638,32 @@ function ForwardMessageDialog() {
 
 function ForwardButton() {
   const { actions } = use(Composer.Context)
-  return <Button onPress={actions.submit}>Forward</Button>
+  return <Button onPress={actions.submit}>轉傳</Button>
 }
 ```
 
-The ForwardButton lives outside the Composer.Frame but still has access to the
+`ForwardButton` 位在 `Composer.Frame` 之外，但由於它在 Provider 內，因此仍可存取提交動作。即便它是個一次性的元件，它仍能從 UI 本身之外存取編輯器的狀態與動作。
 
-submit action because it's within the provider. Even though it's a one-off
-
-component, it can still access the composer's state and actions from outside the
-
-UI itself.
-
-**Key insight:** Components that need shared state don't have to be visually
-
-nested inside each other—they just need to be within the same provider.
+**關鍵見解：**需要共享狀態的元件不一定要在視覺上互相嵌套 —— 它們只需要在同一個 Provider 內即可。
 
 ---
 
-## 3. Implementation Patterns
+## 3. 實作模式
 
-**Impact: MEDIUM**
+**影響程度：中 (MEDIUM)**
 
-Specific techniques for implementing compound components and
-context providers.
+實作複合元件與 Context Provider 的特定技術。
 
-### 3.1 Create Explicit Component Variants
+### 3.1 建立明確的元件變體
 
-**Impact: MEDIUM (self-documenting code, no hidden conditionals)**
+**影響程度：中 (MEDIUM)（自我說明的程式碼，無隱藏條件句）**
 
-Instead of one component with many boolean props, create explicit variant
+與其使用一個具有許多布林屬性的元件，不如建立明確的變體元件。每個變體組合其所需的片段。程式碼本身就是文件。
 
-components. Each variant composes the pieces it needs. The code documents
-
-itself.
-
-**Incorrect: one component, many modes**
+**錯誤：一個元件，多種模式**
 
 ```tsx
-// What does this component actually render?
+// 此元件實際上渲染了什麼？
 <Composer
   isThread
   isEditing={false}
@@ -729,24 +673,22 @@ itself.
 />
 ```
 
-**Correct: explicit variants**
+**正確：明確的變體**
 
 ```tsx
-// Immediately clear what this renders
+// 渲染內容一目瞭然
 <ThreadComposer channelId="abc" />
 
-// Or
+// 或
 <EditMessageComposer messageId="xyz" />
 
-// Or
+// 或
 <ForwardMessageComposer messageId="123" />
 ```
 
-Each implementation is unique, explicit and self-contained. Yet they can each
+每個實作都是唯一、明確且自成一格的。然而，它們都可以使用共享的部分。
 
-use shared parts.
-
-**Implementation:**
+**實作方式：**
 
 ```tsx
 function ThreadComposer({ channelId }: { channelId: string }) {
@@ -785,7 +727,7 @@ function ForwardMessageComposer({ messageId }: { messageId: string }) {
   return (
     <ForwardMessageProvider messageId={messageId}>
       <Composer.Frame>
-        <Composer.Input placeholder="Add a message, if you'd like." />
+        <Composer.Input placeholder="若有需要，請新增訊息。" />
         <Composer.Footer>
           <Composer.Formatting />
           <Composer.Emojis />
@@ -797,27 +739,23 @@ function ForwardMessageComposer({ messageId }: { messageId: string }) {
 }
 ```
 
-Each variant is explicit about:
+每個變體都明確表示：
 
-- What provider/state it uses
+- 使用哪個 Provider/狀態
 
-- What UI elements it includes
+- 包含哪些 UI 元素
 
-- What actions are available
+- 哪些動作可用
 
-No boolean prop combinations to reason about. No impossible states.
+無需推敲布林屬性的組合。沒有不可能發生的狀態。
 
-### 3.2 Prefer Composing Children Over Render Props
+### 3.2 偏好組合 Children 而非 Render Props
 
-**Impact: MEDIUM (cleaner composition, better readability)**
+**影響程度：中 (MEDIUM)（更簡潔的組合，更好的可讀性）**
 
-Use `children` for composition instead of `renderX` props. Children are more
+使用 `children` 進行組合，而非 `renderX` 屬性。Children 更具可讀性，組合起來更自然，且不需要了解回呼函式的特徵標記 (callback signature)。
 
-readable, compose naturally, and don't require understanding callback
-
-signatures.
-
-**Incorrect: render props**
+**錯誤：使用 render props**
 
 ```tsx
 function Composer({
@@ -839,7 +777,7 @@ function Composer({
   )
 }
 
-// Usage is awkward and inflexible
+// 用法彆扭且缺乏彈性
 return (
   <Composer
     renderHeader={() => <CustomHeader />}
@@ -854,7 +792,7 @@ return (
 )
 ```
 
-**Correct: compound components with children**
+**正確：具 Children 的複合元件**
 
 ```tsx
 function ComposerFrame({ children }: { children: React.ReactNode }) {
@@ -865,7 +803,7 @@ function ComposerFooter({ children }: { children: React.ReactNode }) {
   return <footer className='flex'>{children}</footer>
 }
 
-// Usage is flexible
+// 用法極具彈性
 return (
   <Composer.Frame>
     <CustomHeader />
@@ -879,37 +817,37 @@ return (
 )
 ```
 
-**When render props are appropriate:**
+**何時適合使用 Render Props：**
 
 ```tsx
-// Render props work well when you need to pass data back
+// 當您需要將資料傳回時，Render props 效果很好
 <List
   data={items}
   renderItem={({ item, index }) => <Item item={item} index={index} />}
 />
 ```
 
-Use render props when the parent needs to provide data or state to the child.
+當父元件需要將資料或狀態提供給子元件時，請使用 Render props。
 
-Use children when composing static structure.
+在組合靜態結構時，請使用 Children。
 
 ---
 
-## 4. React 19 APIs
+## 4. React 19 API
 
-**Impact: MEDIUM**
+**影響程度：中 (MEDIUM)**
 
-React 19+ only. Don't use `forwardRef`; use `use()` instead of `useContext()`.
+僅限 React 19+。不要使用 `forwardRef`；使用 `use()` 代替 `useContext()`。
 
-### 4.1 React 19 API Changes
+### 4.1 React 19 API 變更
 
-**Impact: MEDIUM (cleaner component definitions and context usage)**
+**影響程度：中 (MEDIUM)（更簡潔的元件定義與 Context 使用）**
 
-> **⚠️ React 19+ only.** Skip this if you're on React 18 or earlier.
+> **⚠️ 僅限 React 19+。** 如果您使用的是 React 18 或更早版本，請跳過此部分。
 
-In React 19, `ref` is now a regular prop (no `forwardRef` wrapper needed), and `use()` replaces `useContext()`.
+在 React 19 中，`ref` 現在是一個普通的 Prop（無需 `forwardRef` 封裝），而 `use()` 取代了 `useContext()`。
 
-**Incorrect: forwardRef in React 19**
+**錯誤：在 React 19 中使用 forwardRef**
 
 ```tsx
 const ComposerInput = forwardRef<TextInput, Props>((props, ref) => {
@@ -917,7 +855,7 @@ const ComposerInput = forwardRef<TextInput, Props>((props, ref) => {
 })
 ```
 
-**Correct: ref as a regular prop**
+**正確：將 ref 作為普通 Prop**
 
 ```tsx
 function ComposerInput({ ref, ...props }: Props & { ref?: React.Ref<TextInput> }) {
@@ -925,23 +863,23 @@ function ComposerInput({ ref, ...props }: Props & { ref?: React.Ref<TextInput> }
 }
 ```
 
-**Incorrect: useContext in React 19**
+**錯誤：在 React 19 中使用 useContext**
 
 ```tsx
 const value = useContext(MyContext)
 ```
 
-**Correct: use instead of useContext**
+**正確：使用 use 代替 useContext**
 
 ```tsx
 const value = use(MyContext)
 ```
 
-`use()` can also be called conditionally, unlike `useContext()`.
+與 `useContext()` 不同，`use()` 也可以在條件句中呼叫。
 
 ---
 
-## References
+## 參考資料 (References)
 
 1. [https://react.dev](https://react.dev)
 2. [https://react.dev/learn/passing-data-deeply-with-context](https://react.dev/learn/passing-data-deeply-with-context)

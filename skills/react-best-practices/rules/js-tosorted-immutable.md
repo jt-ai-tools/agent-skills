@@ -5,6 +5,8 @@ impactDescription: prevents mutation bugs in React state
 tags: javascript, arrays, immutability, react, state, mutation
 ---
 
+[繁體中文版 (Traditional Chinese)](./js-tosorted-immutable_zh_TW.md)
+
 ## Use toSorted() Instead of sort() for Immutability
 
 `.sort()` mutates the array in place, which can cause bugs with React state and props. Use `.toSorted()` to create a new sorted array without mutation.

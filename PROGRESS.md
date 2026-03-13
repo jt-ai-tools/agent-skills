@@ -52,7 +52,7 @@
 | skills/react-best-practices/rules/js-length-check-first.md | 已完成 | |
 | skills/react-best-practices/rules/js-min-max-loop.md | 已完成 | |
 | skills/react-best-practices/rules/js-set-map-lookups.md | 已完成 | |
-| skills/react-best-practices/rules/js-tosorted-immutable.md | 待處理 | |
+| skills/react-best-practices/rules/js-tosorted-immutable.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-activity.md | 待處理 | |
 | skills/react-best-practices/rules/rendering-animate-svg-wrapper.md | 待處理 | |
 | skills/react-best-practices/rules/rendering-conditional-render.md | 待處理 | |

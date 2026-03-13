@@ -5,6 +5,8 @@ impactDescription: prevents stale closures and unnecessary callback recreations
 tags: react, hooks, useState, useCallback, callbacks, closures
 ---
 
+[繁體中文版 (Traditional Chinese)](./rerender-functional-setstate_zh_TW.md)
+
 ## Use Functional setState Updates
 
 When updating state based on the current state value, use the functional update form of setState instead of directly referencing the state variable. This prevents stale closures, eliminates unnecessary dependencies, and creates stable callback references.

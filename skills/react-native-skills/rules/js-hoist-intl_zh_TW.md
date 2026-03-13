@@ -1,19 +1,17 @@
 ---
-title: Hoist Intl Formatter Creation
+title: 提升 Intl 格式化器的建立位置
 impact: LOW-MEDIUM
-impactDescription: avoids expensive object recreation
+impactDescription: 避免重複建立昂貴的物件
 tags: javascript, intl, optimization, memoization
 ---
 
-[繁體中文版 (Traditional Chinese)](./js-hoist-intl_zh_TW.md)
+[English Version](./js-hoist-intl.md)
 
-## Hoist Intl Formatter Creation
+## 提升 Intl 格式化器的建立位置
 
-Don't create `Intl.DateTimeFormat`, `Intl.NumberFormat`, or
-`Intl.RelativeTimeFormat` inside render or loops. These are expensive to
-instantiate. Hoist to module scope when the locale/options are static.
+不要在 render 函式或迴圈中建立 `Intl.DateTimeFormat`、`Intl.NumberFormat` 或 `Intl.RelativeTimeFormat`。這些物件的實例化過程非常耗時。當語系 (locale) 或選項是靜態時，請將其提升 (hoist) 到模組作用域。
 
-**Incorrect (new formatter every render):**
+**錯誤做法 (每次 render 都建立新的格式化器):**
 
 ```tsx
 function Price({ amount }: { amount: number }) {
@@ -25,7 +23,7 @@ function Price({ amount }: { amount: number }) {
 }
 ```
 
-**Correct (hoisted to module scope):**
+**正確做法 (提升到模組作用域):**
 
 ```tsx
 const currencyFormatter = new Intl.NumberFormat('en-US', {
@@ -38,7 +36,7 @@ function Price({ amount }: { amount: number }) {
 }
 ```
 
-**For dynamic locales, memoize:**
+**對於動態語系，請使用 memoize:**
 
 ```tsx
 const dateFormatter = useMemo(
@@ -47,10 +45,10 @@ const dateFormatter = useMemo(
 )
 ```
 
-**Common formatters to hoist:**
+**常見的提升格式化器範例:**
 
 ```tsx
-// Module-level formatters
+// 模組層級的格式化器
 const dateFormatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' })
 const timeFormatter = new Intl.DateTimeFormat('en-US', { timeStyle: 'short' })
 const percentFormatter = new Intl.NumberFormat('en-US', { style: 'percent' })
@@ -59,5 +57,4 @@ const relativeFormatter = new Intl.RelativeTimeFormat('en-US', {
 })
 ```
 
-Creating `Intl` objects is significantly more expensive than `RegExp` or plain
-objects—each instantiation parses locale data and builds internal lookup tables.
+建立 `Intl` 物件比建立 `RegExp` 或普通物件要昂貴得多 — 每次實例化都會解析語系數據並構建內部查找表。

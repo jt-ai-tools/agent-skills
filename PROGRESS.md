@@ -38,7 +38,7 @@
 | skills/react-best-practices/rules/bundle-preload.md | 已完成 | |
 | skills/react-best-practices/rules/client-event-listeners.md | 已完成 | |
 | skills/react-best-practices/rules/client-localstorage-schema.md | 已完成 | |
-| skills/react-best-practices/rules/client-passive-event-listeners.md | 待處理 | |
+| skills/react-best-practices/rules/client-passive-event-listeners.md | 已完成 | |
 | skills/react-best-practices/rules/client-swr-dedup.md | 待處理 | |
 | skills/react-best-practices/rules/js-batch-dom-css.md | 待處理 | |
 | skills/react-best-practices/rules/js-cache-function-results.md | 待處理 | |

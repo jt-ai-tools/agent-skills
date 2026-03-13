@@ -1,17 +1,17 @@
 ---
-title: Use Loop for Min/Max Instead of Sort
+title: 使用迴圈查找最小/最大值而非排序 (Use Loop for Min/Max Instead of Sort)
 impact: LOW
-impactDescription: O(n) instead of O(n log n)
+impactDescription: O(n) 而非 O(n log n) (O(n) instead of O(n log n))
 tags: javascript, arrays, performance, sorting, algorithms
 ---
 
-[繁體中文版 (Traditional Chinese)](./js-min-max-loop_zh_TW.md)
+[English Version](./js-min-max-loop.md)
 
-## Use Loop for Min/Max Instead of Sort
+## 使用迴圈查找最小/最大值而非排序 (Use Loop for Min/Max Instead of Sort)
 
-Finding the smallest or largest element only requires a single pass through the array. Sorting is wasteful and slower.
+尋找最小或最大的元素只需要對陣列進行單次掃描。排序既浪費資源又緩慢。
 
-**Incorrect (O(n log n) - sort to find latest):**
+**不正確 (O(n log n) - 透過排序尋找最新項目)：**
 
 ```typescript
 interface Project {
@@ -26,9 +26,9 @@ function getLatestProject(projects: Project[]) {
 }
 ```
 
-Sorts the entire array just to find the maximum value.
+僅為了尋找最大值而對整個陣列進行排序。
 
-**Incorrect (O(n log n) - sort for oldest and newest):**
+**不正確 (O(n log n) - 透過排序尋找最舊與最新項目)：**
 
 ```typescript
 function getOldestAndNewest(projects: Project[]) {
@@ -37,9 +37,9 @@ function getOldestAndNewest(projects: Project[]) {
 }
 ```
 
-Still sorts unnecessarily when only min/max are needed.
+當只需要最小/最大值時，仍然進行了不必要的排序。
 
-**Correct (O(n) - single loop):**
+**正確 (O(n) - 單次迴圈)：**
 
 ```typescript
 function getLatestProject(projects: Project[]) {
@@ -71,9 +71,9 @@ function getOldestAndNewest(projects: Project[]) {
 }
 ```
 
-Single pass through the array, no copying, no sorting.
+對陣列進行單次掃描，無須複製，無須排序。
 
-**Alternative (Math.min/Math.max for small arrays):**
+**替代方案 (對於小陣列使用 Math.min/Math.max)：**
 
 ```typescript
 const numbers = [5, 2, 8, 1, 9]
@@ -81,4 +81,4 @@ const min = Math.min(...numbers)
 const max = Math.max(...numbers)
 ```
 
-This works for small arrays, but can be slower or just throw an error for very large arrays due to spread operator limitations. Maximal array length is approximately 124000 in Chrome 143 and 638000 in Safari 18; exact numbers may vary - see [the fiddle](https://jsfiddle.net/qw1jabsx/4/). Use the loop approach for reliability.
+這適用於小陣列，但對於非常大的陣列，由於展開運算子 (spread operator) 的限制，可能會變慢或直接拋出錯誤。Chrome 143 的最大陣列長度約為 124,000，Safari 18 約為 638,000；確切數值可能有所不同 - 請參閱 [此測試](https://jsfiddle.net/qw1jabsx/4/)。為了穩定性，請使用迴圈方法。

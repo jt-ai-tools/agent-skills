@@ -1,26 +1,26 @@
 ---
-title: Use after() for Non-Blocking Operations
+title: 對非阻塞操作使用 after()
 impact: MEDIUM
-impactDescription: faster response times
+impactDescription: 更快的響應時間
 tags: server, async, logging, analytics, side-effects
 ---
 
-[繁體中文版 (Traditional Chinese)](./server-after-nonblocking_zh_TW.md)
+[English Version](./server-after-nonblocking.md)
 
-## Use after() for Non-Blocking Operations
+## 對非阻塞操作使用 after()
 
-Use Next.js's `after()` to schedule work that should execute after a response is sent. This prevents logging, analytics, and other side effects from blocking the response.
+使用 Next.js 的 `after()` 來排程應在發送響應後執行的工作。這可以防止記錄、分析和其他副作用阻塞響應。
 
-**Incorrect (blocks response):**
+**錯誤（阻塞響應）：**
 
 ```tsx
 import { logUserAction } from '@/app/utils'
 
 export async function POST(request: Request) {
-  // Perform mutation
+  // 執行資料變更
   await updateDatabase(request)
   
-  // Logging blocks the response
+  // 記錄操作會阻塞響應
   const userAgent = request.headers.get('user-agent') || 'unknown'
   await logUserAction({ userAgent })
   
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 }
 ```
 
-**Correct (non-blocking):**
+**正確（非阻塞）：**
 
 ```tsx
 import { after } from 'next/server'
@@ -39,10 +39,10 @@ import { headers, cookies } from 'next/headers'
 import { logUserAction } from '@/app/utils'
 
 export async function POST(request: Request) {
-  // Perform mutation
+  // 執行資料變更
   await updateDatabase(request)
   
-  // Log after response is sent
+  // 在發送響應後記錄
   after(async () => {
     const userAgent = (await headers()).get('user-agent') || 'unknown'
     const sessionCookie = (await cookies()).get('session-id')?.value || 'anonymous'
@@ -57,19 +57,19 @@ export async function POST(request: Request) {
 }
 ```
 
-The response is sent immediately while logging happens in the background.
+響應會立即發送，而記錄操作則在背景執行。
 
-**Common use cases:**
+**常見使用情境：**
 
-- Analytics tracking
-- Audit logging
-- Sending notifications
-- Cache invalidation
-- Cleanup tasks
+- 分析追蹤
+- 稽核記錄 (Audit logging)
+- 發送通知
+- 快取失效 (Cache invalidation)
+- 清理任務
 
-**Important notes:**
+**重要注意事項：**
 
-- `after()` runs even if the response fails or redirects
-- Works in Server Actions, Route Handlers, and Server Components
+- 即使響應失敗或重新導向，`after()` 仍會執行
+- 適用於 Server Actions、Route Handlers 和 Server Components
 
-Reference: [https://nextjs.org/docs/app/api-reference/functions/after](https://nextjs.org/docs/app/api-reference/functions/after)
+參考資料：[https://nextjs.org/docs/app/api-reference/functions/after](https://nextjs.org/docs/app/api-reference/functions/after)

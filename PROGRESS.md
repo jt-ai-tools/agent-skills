@@ -59,7 +59,7 @@
 | skills/react-best-practices/rules/rendering-content-visibility.md | 待處理 | |
 | skills/react-best-practices/rules/rendering-hoist-jsx.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-hydration-no-flicker.md | 已完成 | |
-| skills/react-best-practices/rules/rendering-hydration-suppress-warning.md | 待處理 | |
+| skills/react-best-practices/rules/rendering-hydration-suppress-warning.md | 已完成 | |
 | skills/react-best-practices/rules/rendering-resource-hints.md | 待處理 | |
 | skills/react-best-practices/rules/rendering-script-defer-async.md | 待處理 | |
 | skills/react-best-practices/rules/rendering-svg-precision.md | 待處理 | |

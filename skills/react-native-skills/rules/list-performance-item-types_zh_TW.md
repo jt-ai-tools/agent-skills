@@ -5,16 +5,13 @@ impactDescription: efficient recycling, less layout thrashing
 tags: list, performance, recycling, heterogeneous, LegendList
 ---
 
-[繁體中文版 (Traditional Chinese)](./list-performance-item-types_zh_TW.md)
+[English Version](./list-performance-item-types.md)
 
-## Use Item Types for Heterogeneous Lists
+## 針對異構列表使用項目類型 (Item Types)
 
-When a list has different item layouts (messages, images, headers, etc.), use a
-`type` field on each item and provide `getItemType` to the list. This puts items
-into separate recycling pools so a message component never gets recycled into an
-image component.
+當一個列表具有不同的項目佈局（訊息、圖像、標題等）時，請在每個項目上使用 `type` 欄位，並為列表提供 `getItemType`。這會將項目放入單獨的回收池中，因此訊息元件永遠不會被回收成圖像元件。
 
-**Incorrect (single component with conditionals):**
+**不正確（帶有條件判斷的單一元件）：**
 
 ```tsx
 type Item = { id: string; text?: string; imageUrl?: string; isHeader?: boolean }
@@ -40,7 +37,7 @@ function Feed({ items }: { items: Item[] }) {
 }
 ```
 
-**Correct (typed items with separate components):**
+**正確（具有獨立元件的類型化項目）：**
 
 ```tsx
 type HeaderItem = { id: string; type: 'header'; title: string }
@@ -70,13 +67,12 @@ function Feed({ items }: { items: FeedItem[] }) {
 }
 ```
 
-**Why this matters:**
+**為什麼這很重要：**
 
-- **Recycling efficiency**: Items with the same type share a recycling pool
-- **No layout thrashing**: A header never recycles into an image cell
-- **Type safety**: TypeScript can narrow the item type in each branch
-- **Better size estimation**: Use `getEstimatedItemSize` with `itemType` for
-  accurate estimates per type
+- **回收效率**：相同類型的項目共用一個回收池
+- **無佈局抖動**：標題永遠不會回收成圖像儲存格
+- **類型安全**：TypeScript 可以縮小每個分支中的項目類型
+- **更好的尺寸估計**：使用 `getEstimatedItemSize` 搭配 `itemType` 進行各種類型的精確估計
 
 ```tsx
 <LegendList
@@ -102,5 +98,5 @@ function Feed({ items }: { items: FeedItem[] }) {
 />
 ```
 
-Reference:
+參考資料：
 [LegendList getItemType](https://legendapp.com/open-source/list/api/props/#getitemtype-v2)

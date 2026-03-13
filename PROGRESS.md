@@ -24,7 +24,7 @@
 | skills/react-best-practices/rules/_sections.md | 已完成 | |
 | skills/react-best-practices/rules/_template.md | 已完成 | |
 | skills/react-best-practices/rules/advanced-event-handler-refs.md | 已完成 | |
-| skills/react-best-practices/rules/advanced-init-once.md | 待處理 | |
+| skills/react-best-practices/rules/advanced-init-once.md | 已完成 | |
 | skills/react-best-practices/rules/advanced-use-latest.md | 待處理 | |
 | skills/react-best-practices/rules/async-api-routes.md | 待處理 | |
 | skills/react-best-practices/rules/async-defer-await.md | 待處理 | |

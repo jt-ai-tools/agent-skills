@@ -1,19 +1,17 @@
 ---
-title: Never Track Scroll Position in useState
+title: 永遠不要在 useState 中追蹤捲動位置
 impact: HIGH
-impactDescription: prevents render thrashing during scroll
+impactDescription: 防止捲動期間的渲染抖動
 tags: scroll, performance, reanimated, useRef
 ---
 
-[繁體中文版 (Traditional Chinese)](./scroll-position-no-state_zh_TW.md)
+[English Version](./scroll-position-no-state.md)
 
-## Never Track Scroll Position in useState
+## 永遠不要在 useState 中追蹤捲動位置
 
-Never store scroll position in `useState`. Scroll events fire rapidly—state
-updates cause render thrashing and dropped frames. Use a Reanimated shared value
-for animations or a ref for non-reactive tracking.
+永遠不要將捲動位置存儲在 `useState` 中。捲動事件觸發非常頻繁——狀態更新會導致渲染抖動 (render thrashing) 和掉幀。請使用 Reanimated 的 shared value 進行動畫處理，或使用 ref 進行非響應式 (non-reactive) 追蹤。
 
-**Incorrect (useState causes jank):**
+**錯誤示範 (useState 導致卡頓)：**
 
 ```tsx
 import { useState } from 'react'
@@ -27,14 +25,14 @@ function Feed() {
   const [scrollY, setScrollY] = useState(0)
 
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    setScrollY(e.nativeEvent.contentOffset.y) // re-renders on every frame
+    setScrollY(e.nativeEvent.contentOffset.y) // 每幀都會重新渲染
   }
 
   return <ScrollView onScroll={onScroll} scrollEventThrottle={16} />
 }
 ```
 
-**Correct (Reanimated for animations):**
+**正確示範 (使用 Reanimated 處理動畫)：**
 
 ```tsx
 import Animated, {
@@ -47,22 +45,22 @@ function Feed() {
 
   const onScroll = useAnimatedScrollHandler({
     onScroll: (e) => {
-      scrollY.value = e.contentOffset.y // runs on UI thread, no re-render
+      scrollY.value = e.contentOffset.y // 在 UI 線程運行，不會重新渲染
     },
   })
 
   return (
     <Animated.ScrollView
       onScroll={onScroll}
-      // higher number has better performance, but it fires less often.
-      // unset this if you need higher precision over performance.
+      // 較高的數值性能較好，但觸發頻率較低。
+      // 如果你需要比性能更高的精度，請取消設置此項。
       scrollEventThrottle={16}
     />
   )
 }
 ```
 
-**Correct (ref for non-reactive tracking):**
+**正確示範 (使用 ref 進行非響應式追蹤)：**
 
 ```tsx
 import { useRef } from 'react'
@@ -76,7 +74,7 @@ function Feed() {
   const scrollY = useRef(0)
 
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    scrollY.current = e.nativeEvent.contentOffset.y // no re-render
+    scrollY.current = e.nativeEvent.contentOffset.y // 不會重新渲染
   }
 
   return <ScrollView onScroll={onScroll} scrollEventThrottle={16} />

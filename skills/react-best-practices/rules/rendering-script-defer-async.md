@@ -5,6 +5,8 @@ impactDescription: eliminates render-blocking
 tags: rendering, script, defer, async, performance
 ---
 
+[繁體中文版 (Traditional Chinese)](./rendering-script-defer-async_zh_TW.md)
+
 ## Use defer or async on Script Tags
 
 **Impact: HIGH (eliminates render-blocking)**

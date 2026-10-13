@@ -46,8 +46,9 @@ async function extractTests() {
     console.log(`Rules directory: ${RULES_DIR}`)
     console.log(`Output file: ${TEST_CASES_FILE}`)
     
+    // Localized companion docs are preserved, but are not English rule sources.
     const files = await readdir(RULES_DIR)
-    const ruleFiles = files.filter(f => f.endsWith('.md') && !f.startsWith('_') && f !== 'README.md')
+    const ruleFiles = files.filter(f => f.endsWith('.md') && !f.endsWith('_zh_TW.md') && !f.startsWith('_') && f !== 'README.md')
     
     const allTestCases: TestCase[] = []
     

@@ -73,8 +73,9 @@ async function validate() {
     console.log('Validating rule files...')
     console.log(`Rules directory: ${RULES_DIR}`)
     
+    // Localized companion docs are preserved, but are not English rule sources.
     const files = await readdir(RULES_DIR)
-    const ruleFiles = files.filter(f => f.endsWith('.md') && !f.startsWith('_'))
+    const ruleFiles = files.filter(f => f.endsWith('.md') && !f.endsWith('_zh_TW.md') && !f.startsWith('_'))
     
     const allErrors: ValidationError[] = []
     

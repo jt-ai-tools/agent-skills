@@ -138,9 +138,10 @@ async function buildSkill(skillConfig: SkillConfig) {
   console.log(`  Output file: ${skillConfig.outputFile}`)
 
   // Read all rule files (exclude files starting with _ and README.md)
+  // Localized companion docs are preserved, but are not English rule sources.
   const files = await readdir(skillConfig.rulesDir)
   const ruleFiles = files
-    .filter((f) => f.endsWith('.md') && !f.startsWith('_') && f !== 'README.md')
+    .filter((f) => f.endsWith('.md') && !f.endsWith('_zh_TW.md') && !f.startsWith('_') && f !== 'README.md')
     .sort() // Sort filenames for consistent ordering across systems
 
   const ruleData: RuleFile[] = []
